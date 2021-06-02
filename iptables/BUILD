@@ -9,16 +9,16 @@ load("//:checksums.bzl", "ARCHITECTURES")
     container_image(
         name = "iptables" + "_" + arch,
         architecture = arch,
-        base = "//base:base" + "_" + "nonroot" + "_" + arch + "_debian9",
+        base = "//base:base" + "_" + "nonroot" + "_" + arch + "_debian10",
         debs = [
-            DISTRO_PACKAGES[arch]["_debian9"]["iptables"],
-            DISTRO_PACKAGES[arch]["_debian9"]["libiptc0"],
-            DISTRO_PACKAGES[arch]["_debian9"]["libip4tc0"],
-            DISTRO_PACKAGES[arch]["_debian9"]["libip6tc0"],
-            DISTRO_PACKAGES[arch]["_debian9"]["libxtables12"],
-            DISTRO_PACKAGES[arch]["_debian9"]["libnfnetlink0"],
-            DISTRO_PACKAGES[arch]["_debian9"]["libnetfilter-conntrack3"],
-            DISTRO_PACKAGES[arch]["_debian9"]["libmnl0"],
+            DISTRO_PACKAGES[arch]["_debian10"]["iptables"],
+            DISTRO_PACKAGES[arch]["_debian10"]["libiptc0"],
+            DISTRO_PACKAGES[arch]["_debian10"]["libip4tc0"],
+            DISTRO_PACKAGES[arch]["_debian10"]["libip6tc0"],
+            DISTRO_PACKAGES[arch]["_debian10"]["libxtables12"],
+            DISTRO_PACKAGES[arch]["_debian10"]["libnfnetlink0"],
+            DISTRO_PACKAGES[arch]["_debian10"]["libnetfilter-conntrack3"],
+            DISTRO_PACKAGES[arch]["_debian10"]["libmnl0"],
         ],
     )
     for arch in ARCHITECTURES

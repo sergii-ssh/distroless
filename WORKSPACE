@@ -83,124 +83,6 @@ load(
 
 [
     dpkg_list(
-        name = "package_bundle_" + arch + "_debian9",
-        packages = [
-            "libc6",
-            "base-files",
-            "ca-certificates",
-            "openssl",
-            "libssl1.0.2",
-            "libssl1.1",
-            "libbz2-1.0",
-            "libdb5.3",
-            "libffi6",
-            "libncursesw5",
-            "liblzma5",
-            "libexpat1",
-            "libreadline7",
-            "libtinfo5",
-            "libsqlite3-0",
-            "mime-support",
-            "netbase",
-            "readline-common",
-            "tzdata",
-
-            #custom
-            "iptables",
-            "libiptc0",
-            "libip4tc0",
-            "libip6tc0",
-            "libxtables12",
-            "libnfnetlink0",
-            "libnetfilter-conntrack3",
-            "libmnl0",
-
-            #c++
-            "libgcc1",
-            "libgomp1",
-            "libstdc++6",
-
-            #java
-            "zlib1g",
-            "libjpeg62-turbo",
-            "libpng16-16",
-            "liblcms2-2",
-            "libfreetype6",
-            "fonts-dejavu-core",
-            "fontconfig-config",
-            "libfontconfig1",
-            "libuuid1",
-            "openjdk-8-jre-headless",
-            "openjdk-8-jdk-headless",
-            "openjdk-11-jre-headless",
-            "openjdk-11-jdk-headless",
-            "libc-bin",
-
-            #python
-            "libpython2.7-minimal",
-            "python2.7-minimal",
-            "libpython2.7-stdlib",
-            "dash",
-            "libc-bin",
-
-            #python3
-            "libmpdec2",
-            "libpython3.5-minimal",
-            "libpython3.5-stdlib",
-            "python3.5-minimal",
-
-            #dotnet
-            "libcurl3",
-            "libgssapi-krb5-2",
-            "libicu57",
-            "liblttng-ust0",
-            "libssl1.0.2",
-            "libuuid1",
-            "zlib1g",
-            "curl",
-            "libcomerr2",
-            "libidn2-0",
-            "libk5crypto3",
-            "libkrb5-3",
-            "libldap-2.4-2",
-            "libldap-common",
-            "libsasl2-2",
-            "libnghttp2-14",
-            "libpsl5",
-            "librtmp1",
-            "libssh2-1",
-            "libkeyutils1",
-            "libkrb5support0",
-            "libunistring0",
-            "libgnutls30",
-            "libgmp10",
-            "libhogweed4",
-            "libidn11",
-            "libnettle6",
-            "libp11-kit0",
-            "libffi6",
-            "libtasn1-6",
-            "libsasl2-modules-db",
-            "libgcrypt20",
-            "libgpg-error0",
-            "libacl1",
-            "libattr1",
-            "libselinux1",
-            "libpcre3",
-            "libbz2-1.0",
-            "liblzma5",
-        ] + (["libunwind8"] if arch in BASE_ARCHITECTURES else []),
-        sources = [
-            "@" + arch + "_debian9_updates//file:Packages.json",
-            "@" + arch + "_debian9_backports//file:Packages.json",
-            "@" + arch + "_debian9//file:Packages.json",
-        ] + (["@" + arch + "_debian9_security//file:Packages.json"] if arch in BASE_ARCHITECTURES else []),
-    )
-    for arch in ARCHITECTURES
-]
-
-[
-    dpkg_list(
         name = "package_bundle_" + arch + "_debian10",
         packages = [
             "libc6",
@@ -222,6 +104,13 @@ load(
 
             #custom
             "iptables",
+            "libiptc0",
+            "libip4tc0",
+            "libip6tc0",
+            "libxtables12",
+            "libnfnetlink0",
+            "libnetfilter-conntrack3",
+            "libmnl0",
 
             #c++
             "libgcc1",
@@ -258,47 +147,6 @@ load(
             "libncursesw6",
             "python3-distutils",
             "python3.7-minimal",
-
-            #dotnet
-            "libcurl4",
-            "libgssapi-krb5-2",
-            "libicu63",
-            "liblttng-ust0",
-            "libssl1.1",
-            "libuuid1",
-            "zlib1g",
-            "curl",
-            "libcomerr2",
-            "libidn2-0",
-            "libk5crypto3",
-            "libkrb5-3",
-            "libldap-2.4-2",
-            "libldap-common",
-            "libsasl2-2",
-            "libnghttp2-14",
-            "libpsl5",
-            "librtmp1",
-            "libssh2-1",
-            "libkeyutils1",
-            "libkrb5support0",
-            "libunistring2",
-            "libgnutls30",
-            "libgmp10",
-            "libhogweed4",
-            "libidn11",
-            "libnettle6",
-            "libp11-kit0",
-            "libffi6",
-            "libtasn1-6",
-            "libsasl2-modules-db",
-            "libgcrypt20",
-            "libgpg-error0",
-            "libacl1",
-            "libattr1",
-            "libselinux1",
-            "libpcre3",
-            "libbz2-1.0",
-            "liblzma5",
         ] + (["libunwind8"] if arch in BASE_ARCHITECTURES else []),
         sources = [
             "@" + arch + "_debian10_security//file:Packages.json",
@@ -324,55 +172,55 @@ http_archive(
 http_archive(
     name = "nodejs10_amd64",
     build_file = "//nodejs:BUILD.nodejs",
-    sha256 = "aa7e9e1d8abcc169119bf5c56ede515689f2644ccc4d40ca0fc33756a3deb1f7",
-    strip_prefix = "node-v10.22.0-linux-x64/",
+    sha256 = "7a70083a73719a3c7846533923d5c4e955405c2b4ba1c1abd95ed21ae8b52775",
+    strip_prefix = "node-v10.24.1-linux-x64/",
     type = "tar.gz",
-    urls = ["https://nodejs.org/dist/v10.22.0/node-v10.22.0-linux-x64.tar.gz"],
+    urls = ["https://nodejs.org/dist/v10.24.1/node-v10.24.1-linux-x64.tar.gz"],
 )
 
 http_archive(
     name = "nodejs12_amd64",
     build_file = "//nodejs:BUILD.nodejs",
-    sha256 = "8cdacecc43c35bcfa5474c793b9e7a01835e4171264f7b13f3e57093371872e9",
-    strip_prefix = "node-v12.18.3-linux-x64/",
+    sha256 = "d315c5dea4d96658164cdb257bd8dbb5e44bdd2a7c1d747841f06515f23a0042",
+    strip_prefix = "node-v12.22.1-linux-x64/",
     type = "tar.gz",
-    urls = ["https://nodejs.org/dist/v12.18.3/node-v12.18.3-linux-x64.tar.gz"],
+    urls = ["https://nodejs.org/dist/v12.22.1/node-v12.22.1-linux-x64.tar.gz"],
 )
 
 http_archive(
     name = "nodejs14_amd64",
     build_file = "//nodejs:BUILD.nodejs",
-    sha256 = "5e2c59200c86c37a0c800fe2cd2cfabc459f8a3ae3f83c3611483c485ad32e4f",
-    strip_prefix = "node-v14.6.0-linux-x64/",
+    sha256 = "068400cb9f53d195444b9260fd106f7be83af62bb187932656b68166a2f87f44",
+    strip_prefix = "node-v14.16.1-linux-x64/",
     type = "tar.gz",
-    urls = ["https://nodejs.org/dist/v14.6.0/node-v14.6.0-linux-x64.tar.gz"],
+    urls = ["https://nodejs.org/dist/v14.16.1/node-v14.16.1-linux-x64.tar.gz"],
 )
 
 http_archive(
     name = "nodejs10_arm64",
     build_file = "//nodejs:BUILD.nodejs",
-    sha256 = "8e59eb6865f704785a9aa53ccf9f4cb10412caaf778cee617241a0d0684e008d",
-    strip_prefix = "node-v10.22.0-linux-arm64/",
+    sha256 = "0ae4931d0ea779ecb237c1fc9f4a27271b0054b1efabc783863478913fe6caa6",
+    strip_prefix = "node-v10.24.1-linux-arm64/",
     type = "tar.gz",
-    urls = ["https://nodejs.org/dist/v10.22.0/node-v10.22.0-linux-arm64.tar.gz"],
+    urls = ["https://nodejs.org/dist/v10.24.1/node-v10.24.1-linux-arm64.tar.gz"],
 )
 
 http_archive(
     name = "nodejs12_arm64",
     build_file = "//nodejs:BUILD.nodejs",
-    sha256 = "f2b8b7f34966a03f03fcd89fa4924fb97ea680eae4c4e02ff1aafd9ea89ecad8",
-    strip_prefix = "node-v12.18.3-linux-arm64/",
+    sha256 = "917c582b7f7ae5ff8b2d97e05d00598011f9fbfcc4f76952da3ed477405c9c1a",
+    strip_prefix = "node-v12.22.1-linux-arm64/",
     type = "tar.gz",
-    urls = ["https://nodejs.org/dist/v12.18.3/node-v12.18.3-linux-arm64.tar.gz"],
+    urls = ["https://nodejs.org/dist/v12.22.1/node-v12.22.1-linux-arm64.tar.gz"],
 )
 
 http_archive(
     name = "nodejs14_arm64",
     build_file = "//nodejs:BUILD.nodejs",
-    sha256 = "eb4f98efe22057a831415c2367416330878f0e1ad9a9bb5c25a6631031588075",
-    strip_prefix = "node-v14.6.0-linux-arm64/",
+    sha256 = "58cb307666ed4aa751757577a563b8a1e5d4ee73a9fac2b495e5c463682a07d1",
+    strip_prefix = "node-v14.16.1-linux-arm64/",
     type = "tar.gz",
-    urls = ["https://nodejs.org/dist/v14.6.0/node-v14.6.0-linux-arm64.tar.gz"],
+    urls = ["https://nodejs.org/dist/v14.16.1/node-v14.16.1-linux-arm64.tar.gz"],
 )
 
 http_archive(
@@ -436,19 +284,23 @@ http_file(
     urls = ["https://busybox.net/downloads/binaries/1.31.0-defconfig-multiarch-musl/busybox-s390x"],
 )
 
+# To update ppc64le busybox binary (#723)
+# Get the latest commit hash from dist-ppc64le branch of docker-library repo.
+# Substitute it in the link: https://github.com/docker-library/busybox/raw/<latest-commit-hash>/stable/musl/busybox.tar.xz
+# Update the sha256 value. Since github api doesn't give sha256 value, it can be obtained using sha256sum command.
 http_file(
     name = "busybox_ppc64le",
     executable = True,
-    sha256 = "7f896a2560ef3e2d11438018fef2fbdf8c2a6a2e4b84b1bcbaacc669967532d4",
-    urls = ["https://busybox.net/downloads/binaries/1.31.0-defconfig-multiarch-musl/busybox-powerpc64"],
+    sha256 = "469297ea9293df0dcb6c3f8d344eaf9f9b6ec1732696ffe86994f87c3600423b",
+    urls = ["https://github.com/docker-library/busybox/raw/c0125333c4c3dfa4b9e5fd9fe6fbb875242f3613/stable/musl/busybox.tar.xz"],
 )
 
 # Docker rules.
 http_archive(
     name = "io_bazel_rules_docker",
-    sha256 = "2dcf63f5c36c50def7091ef94ffcf94cce4056f3e0a968876f4ec41953a8fbfb",
-    strip_prefix = "rules_docker-feaaebdd3162fb643494af07698f56ca9aba1241",
-    urls = ["https://github.com/bazelbuild/rules_docker/archive/feaaebdd3162fb643494af07698f56ca9aba1241.tar.gz"],
+    sha256 = "198b31d184bbf5f108503a9b7df2a9e40228b63ca60f48a1e6d9959a08015d80",
+    strip_prefix = "rules_docker-afd552062f7cf6c53f636e68c3c011dfe990ebf6",
+    urls = ["https://github.com/bazelbuild/rules_docker/archive/afd552062f7cf6c53f636e68c3c011dfe990ebf6.tar.gz"],
 )
 
 load(

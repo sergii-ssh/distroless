@@ -14,6 +14,7 @@ docker_manifest() {
 
   for arch in $_archs; do
     _from_images="$_from_images $_image-$arch"
+    docker pull "$_image-$arch"
   done
 
   docker manifest create $_image $_from_images
