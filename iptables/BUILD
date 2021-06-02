@@ -20,6 +20,14 @@ load("//:checksums.bzl", "ARCHITECTURES")
             DISTRO_PACKAGES[arch]["_debian10"]["libnetfilter-conntrack3"],
             DISTRO_PACKAGES[arch]["_debian10"]["libmnl0"],
         ],
+        symlinks = {
+          "/usr/sbin/iptables": "/usr/sbin/iptables-legacy",
+          "/usr/sbin/iptables-restore": "/usr/sbin/iptables-legacy-restore",
+          "/usr/sbin/iptables-save": "/usr/sbin/iptables-legacy-save",
+          "/usr/sbin/ip6tables": "/usr/sbin/ip6tables-legacy",
+          "/usr/sbin/ip6tables-restore": "/usr/sbin/ip6tables-legacy-restore",
+          "/usr/sbin/ip6tables-save": "/usr/sbin/ip6tables-legacy-save",
+        },
     )
     for arch in ARCHITECTURES
 ]
