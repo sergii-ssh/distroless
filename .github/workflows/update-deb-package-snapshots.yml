@@ -1,10 +1,14 @@
 name: update-snapshots
 on:
+  # will send emails to last editor of file
   schedule:
     - cron:  '30 8 * * *'
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+
     steps:
     - name: Checkout
       uses: actions/checkout@v2

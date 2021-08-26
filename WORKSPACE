@@ -59,11 +59,26 @@ load(
     dpkg_src(
         name = arch + "_" + name + "_security",
         package_prefix = "https://snapshot.debian.org/archive/debian-security/{}/".format(DEBIAN_SECURITY_SNAPSHOT),
-        packages_gz_url = "https://snapshot.debian.org/archive/debian-security/{}/dists/{}/updates/main/binary-{}/Packages.gz".format(DEBIAN_SECURITY_SNAPSHOT, distro, arch),
+        packages_url = "https://snapshot.debian.org/archive/debian-security/{}/dists/{}/updates/main/binary-{}/Packages.xz".format(DEBIAN_SECURITY_SNAPSHOT, distro, arch),
         sha256 = SHA256s[arch][name]["security"],
     )
     for arch in ARCHITECTURES
     for (name, distro) in VERSIONS
+    if "debian10" == name
+    if "security" in SHA256s[arch][name]
+]
+
+# debian11 has a slightly different structure for security on snapshots
+[
+    dpkg_src(
+        name = arch + "_" + name + "_security",
+        package_prefix = "https://snapshot.debian.org/archive/debian-security/{}/".format(DEBIAN_SECURITY_SNAPSHOT),
+        packages_url = "https://snapshot.debian.org/archive/debian-security/{}/dists/{}-security/main/binary-{}/Packages.xz".format(DEBIAN_SECURITY_SNAPSHOT, distro, arch),
+        sha256 = SHA256s[arch][name]["security"],
+    )
+    for arch in ARCHITECTURES
+    for (name, distro) in VERSIONS
+    if "debian11" == name
     if "security" in SHA256s[arch][name]
 ]
 
@@ -79,6 +94,33 @@ load(
     for arch in ARCHITECTURES
     for (name, distro) in VERSIONS
     if "backports" in SHA256s[arch][name]
+]
+
+[
+    dpkg_list(
+        name = "package_bundle_" + arch + "_debian11",
+        # only packages for static and base at the moment
+        packages = [
+            "base-files",
+            "ca-certificates",
+            "libc6",
+            "libssl1.1",
+            "netbase",
+            "openssl",
+            "tzdata",
+
+            # c++
+            "libgcc-s1",
+            "libgomp1",
+            "libstdc++6",
+        ],
+        sources = [
+            "@" + arch + "_debian11_security//file:Packages.json",
+            "@" + arch + "_debian11_updates//file:Packages.json",
+            "@" + arch + "_debian11//file:Packages.json",
+        ],
+    )
+    for arch in ARCHITECTURES
 ]
 
 [
@@ -181,19 +223,19 @@ http_archive(
 http_archive(
     name = "nodejs12_amd64",
     build_file = "//nodejs:BUILD.nodejs",
-    sha256 = "d315c5dea4d96658164cdb257bd8dbb5e44bdd2a7c1d747841f06515f23a0042",
-    strip_prefix = "node-v12.22.1-linux-x64/",
+    sha256 = "89eaf038c41439dcbc543d1783adc0e9f38ddf07c993c08e111d55fe35dadc21",
+    strip_prefix = "node-v12.22.5-linux-x64/",
     type = "tar.gz",
-    urls = ["https://nodejs.org/dist/v12.22.1/node-v12.22.1-linux-x64.tar.gz"],
+    urls = ["https://nodejs.org/dist/v12.22.5/node-v12.22.5-linux-x64.tar.gz"],
 )
 
 http_archive(
     name = "nodejs14_amd64",
     build_file = "//nodejs:BUILD.nodejs",
-    sha256 = "068400cb9f53d195444b9260fd106f7be83af62bb187932656b68166a2f87f44",
-    strip_prefix = "node-v14.16.1-linux-x64/",
+    sha256 = "dc04c7e60235ff73536ba0d9e50638090f60cacabfd83184082dce3b330afc6e",
+    strip_prefix = "node-v14.17.5-linux-x64/",
     type = "tar.gz",
-    urls = ["https://nodejs.org/dist/v14.16.1/node-v14.16.1-linux-x64.tar.gz"],
+    urls = ["https://nodejs.org/dist/v14.17.5/node-v14.17.5-linux-x64.tar.gz"],
 )
 
 http_archive(
@@ -208,51 +250,19 @@ http_archive(
 http_archive(
     name = "nodejs12_arm64",
     build_file = "//nodejs:BUILD.nodejs",
-    sha256 = "917c582b7f7ae5ff8b2d97e05d00598011f9fbfcc4f76952da3ed477405c9c1a",
-    strip_prefix = "node-v12.22.1-linux-arm64/",
+    sha256 = "bfb436a87142e9dc73ed675c81c267490e575f9abfbbc7fa5db227a2ab6b555c",
+    strip_prefix = "node-v12.22.5-linux-arm64/",
     type = "tar.gz",
-    urls = ["https://nodejs.org/dist/v12.22.1/node-v12.22.1-linux-arm64.tar.gz"],
+    urls = ["https://nodejs.org/dist/v12.22.5/node-v12.22.5-linux-arm64.tar.gz"],
 )
 
 http_archive(
     name = "nodejs14_arm64",
     build_file = "//nodejs:BUILD.nodejs",
-    sha256 = "58cb307666ed4aa751757577a563b8a1e5d4ee73a9fac2b495e5c463682a07d1",
-    strip_prefix = "node-v14.16.1-linux-arm64/",
+    sha256 = "bee6d7fb5dbdd2931e688b33defd449afdfd9cd6e716975864406cda18daca66",
+    strip_prefix = "node-v14.17.5-linux-arm64/",
     type = "tar.gz",
-    urls = ["https://nodejs.org/dist/v14.16.1/node-v14.16.1-linux-arm64.tar.gz"],
-)
-
-http_archive(
-    name = "dotnet",
-    build_file = "//experimental/dotnet:BUILD.dotnet",
-    sha256 = "69ecad24bce4f2132e0db616b49e2c35487d13e3c379dabc3ec860662467b714",
-    type = "tar.gz",
-    urls = ["https://download.microsoft.com/download/5/F/0/5F0362BD-7D0A-4A9D-9BF9-022C6B15B04D/dotnet-runtime-2.0.0-linux-x64.tar.gz"],
-)
-
-http_archive(
-    name = "dotnet_core_aspnet",
-    build_file = "//experimental/dotnet:BUILD.dotnet",
-    sha256 = "823f8ea555fd56ab40d56d423748036204c4540c08baa61de4462978a0c35583",
-    type = "tar.gz",
-    urls = ["https://download.visualstudio.microsoft.com/download/pr/f7c8f82a-8c47-497d-875b-2ac210599ec5/e8aea0c195efed8a9aff2ba687db8c26/aspnetcore-runtime-3.1.8-linux-x64.tar.gz"],
-)
-
-http_archive(
-    name = "dotnet_core_runtime",
-    build_file = "//experimental/dotnet:BUILD.dotnet",
-    sha256 = "c50800e02cea23609ec6a009b1fbfe6b1f7ec4634c54bee089f918fca8fe2323",
-    type = "tar.gz",
-    urls = ["https://download.visualstudio.microsoft.com/download/pr/e4e47a0a-132e-416a-b8eb-f3373ad189d9/43af4412e27696c3c16e50f496f6c7af/dotnet-runtime-3.1.8-linux-x64.tar.gz"],
-)
-
-http_archive(
-    name = "dotnet_core_sdk",
-    build_file = "//experimental/dotnet:BUILD.dotnet",
-    sha256 = "2b6b172f9483e499141e37a6b932a547d9476bf03f3e71a0fefb76c52e01a9ee",
-    type = "tar.gz",
-    urls = ["https://download.visualstudio.microsoft.com/download/pr/f01e3d97-c1c3-4635-bc77-0c893be36820/6ec6acabc22468c6cc68b61625b14a7d/dotnet-sdk-3.1.402-linux-x64.tar.gz"],
+    urls = ["https://nodejs.org/dist/v14.17.5/node-v14.17.5-linux-arm64.tar.gz"],
 )
 
 # For the debug image
@@ -298,9 +308,9 @@ http_file(
 # Docker rules.
 http_archive(
     name = "io_bazel_rules_docker",
-    sha256 = "198b31d184bbf5f108503a9b7df2a9e40228b63ca60f48a1e6d9959a08015d80",
-    strip_prefix = "rules_docker-afd552062f7cf6c53f636e68c3c011dfe990ebf6",
-    urls = ["https://github.com/bazelbuild/rules_docker/archive/afd552062f7cf6c53f636e68c3c011dfe990ebf6.tar.gz"],
+    sha256 = "59d5b42ac315e7eadffa944e86e90c2990110a1c8075f1cd145f487e999d22b3",
+    strip_prefix = "rules_docker-0.17.0",
+    urls = ["https://github.com/bazelbuild/rules_docker/releases/download/v0.17.0/rules_docker-v0.17.0.tar.gz"],
 )
 
 load(
@@ -346,19 +356,15 @@ _go_image_repos()
 
 # Rust repositories
 http_archive(
-    name = "io_bazel_rules_rust",
-    sha256 = "e7632fb27da7b303e6a08e75a2cc0d5e954552a8a6637c633cedadb93c59c0dc",
-    strip_prefix = "rules_rust-c409198dcc26a276dfca8bb83c8941052c7dad5b",
+    name = "rules_rust",
+    sha256 = "42e60f81e2b269d28334b73b70d02fb516c8de0c16242f5d376bfe6d94a3509f",
+    strip_prefix = "rules_rust-58f709ffec90da93c4e622d8d94f0cd55cd2ef54",
     urls = [
-        # Master branch as of 2020-09-29
-        "https://github.com/bazelbuild/rules_rust/archive/c409198dcc26a276dfca8bb83c8941052c7dad5b.tar.gz",
+        # Master branch as of 2021-02-04
+        "https://github.com/bazelbuild/rules_rust/archive/58f709ffec90da93c4e622d8d94f0cd55cd2ef54.tar.gz",
     ],
 )
 
-load("@io_bazel_rules_rust//rust:repositories.bzl", "rust_repositories")
+load("@rules_rust//rust:repositories.bzl", "rust_repositories")
 
 rust_repositories()
-
-load("@io_bazel_rules_rust//:workspace.bzl", "bazel_version")
-
-bazel_version(name = "bazel_version")
