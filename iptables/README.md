@@ -7,8 +7,9 @@ Currently this builds only the `nonroot`, `debian9` variants. However, all archi
 ## Build + Publish
 
 ```shell
+export HUB=gcr.io/istio-release
 # Build and publish the docker images
-bazel run '//iptables:publish' --define HUB=gcr.io/istio-release
+bazel run '//iptables:publish' --define HUB=${HUB}
 # Create a fat manifest with all architectures and publish
-HUB=gcr.io/istio-release ./istiobuild_docker.sh
+./istiobuild_docker.sh
 ```

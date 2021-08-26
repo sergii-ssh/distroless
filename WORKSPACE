@@ -109,6 +109,15 @@ load(
             "openssl",
             "tzdata",
 
+            #custom
+            "iptables",
+            "libip4tc2",
+            "libip6tc2",
+            "libxtables12",
+            "libnfnetlink0",
+            "libnetfilter-conntrack3",
+            "libmnl0",
+
             # c++
             "libgcc-s1",
             "libgomp1",
