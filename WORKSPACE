@@ -122,6 +122,51 @@ load(
             "libgcc-s1",
             "libgomp1",
             "libstdc++6",
+
+            #java
+            "fontconfig-config",
+            "fonts-dejavu-core",
+            "libbrotli1",
+            "libc-bin",
+            "libexpat1",
+            "libfontconfig1",
+            "libfreetype6",
+            "libglib2.0-0",
+            "libgraphite2-3",
+            "libharfbuzz0b",
+            "libjpeg62-turbo",
+            "liblcms2-2",
+            "libpcre3",
+            "libpng16-16",
+            "libuuid1",
+            "openjdk-11-jdk-headless",
+            "openjdk-11-jre-headless",
+            "zlib1g",
+
+            # python
+            "dash",
+            "libbz2-1.0",
+            "libcom-err2",
+            "libcrypt1",  # TODO: glibc library for -lcrypt; maybe should be in cc?
+            "libdb5.3",
+            "libffi7",
+            "libgssapi-krb5-2",
+            "libk5crypto3",
+            "libkeyutils1",
+            "libkrb5-3",
+            "libkrb5support0",
+            "liblzma5",
+            "libmpdec3",
+            "libncursesw6",
+            "libnsl2",
+            "libpython3.9-minimal",
+            "libpython3.9-stdlib",
+            "libreadline8",
+            "libsqlite3-0",
+            "libtinfo6",
+            "libtirpc3",
+            "python3-distutils",
+            "python3.9-minimal",
         ],
         sources = [
             "@" + arch + "_debian11_security//file:Packages.json",
@@ -181,15 +226,14 @@ load(
             "openjdk-11-jre-headless",
             "openjdk-11-jdk-headless",
             "libc-bin",
-
-            #python
-            "dash",
-            "libc-bin",
-            "libpython2.7-minimal",
-            "libpython2.7-stdlib",
-            "python2.7-minimal",
+            "libgraphite2-3",
+            "libharfbuzz0b",
+            "libglib2.0-0",
+            "libpcre3",
 
             #python3
+            "dash",
+            "libc-bin",
             "libmpdec2",
             "libpython3.7-minimal",
             "libpython3.7-stdlib",
@@ -212,66 +256,66 @@ load(
 http_archive(
     name = "jetty",
     build_file = "//java:BUILD.jetty",
-    sha256 = "1b9ec532cd9b94550fad655e066a1f9cc2d350a1c79daea85d5c56fdbcd9aaa8",
-    strip_prefix = "jetty-distribution-9.4.22.v20191022/",
+    sha256 = "01fae654b09932e446019aa859e7af6e05e27dbade12b54cd7bae3249fc723d9",
+    strip_prefix = "jetty-distribution-9.4.43.v20210629/",
     type = "tar.gz",
-    urls = ["https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-distribution/9.4.22.v20191022/jetty-distribution-9.4.22.v20191022.tar.gz"],
+    urls = ["https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-distribution/9.4.43.v20210629/jetty-distribution-9.4.43.v20210629.tar.gz"],
 )
 
 # Node (https://nodejs.org/en/about/releases/)
 # Follow Node's maintainence schedule and support all LTS versions that are not end of life
 http_archive(
-    name = "nodejs10_amd64",
-    build_file = "//nodejs:BUILD.nodejs",
-    sha256 = "7a70083a73719a3c7846533923d5c4e955405c2b4ba1c1abd95ed21ae8b52775",
-    strip_prefix = "node-v10.24.1-linux-x64/",
-    type = "tar.gz",
-    urls = ["https://nodejs.org/dist/v10.24.1/node-v10.24.1-linux-x64.tar.gz"],
-)
-
-http_archive(
     name = "nodejs12_amd64",
     build_file = "//nodejs:BUILD.nodejs",
-    sha256 = "89eaf038c41439dcbc543d1783adc0e9f38ddf07c993c08e111d55fe35dadc21",
-    strip_prefix = "node-v12.22.5-linux-x64/",
+    sha256 = "6e5ce9cc7dcd31b182730cd662b1813c201fa98089e1013db4abd141716852dc",
+    strip_prefix = "node-v12.22.6-linux-x64/",
     type = "tar.gz",
-    urls = ["https://nodejs.org/dist/v12.22.5/node-v12.22.5-linux-x64.tar.gz"],
+    urls = ["https://nodejs.org/dist/v12.22.6/node-v12.22.6-linux-x64.tar.gz"],
 )
 
 http_archive(
     name = "nodejs14_amd64",
     build_file = "//nodejs:BUILD.nodejs",
-    sha256 = "dc04c7e60235ff73536ba0d9e50638090f60cacabfd83184082dce3b330afc6e",
-    strip_prefix = "node-v14.17.5-linux-x64/",
+    sha256 = "19e376214450e93e58687198070b4ab46e42357032ec65f23a7e35b0e86ad6e2",
+    strip_prefix = "node-v14.17.6-linux-x64/",
     type = "tar.gz",
-    urls = ["https://nodejs.org/dist/v14.17.5/node-v14.17.5-linux-x64.tar.gz"],
+    urls = ["https://nodejs.org/dist/v14.17.6/node-v14.17.6-linux-x64.tar.gz"],
 )
 
 http_archive(
-    name = "nodejs10_arm64",
+    name = "nodejs16_amd64",
     build_file = "//nodejs:BUILD.nodejs",
-    sha256 = "0ae4931d0ea779ecb237c1fc9f4a27271b0054b1efabc783863478913fe6caa6",
-    strip_prefix = "node-v10.24.1-linux-arm64/",
+    sha256 = "1d48c69e4141792f314d29f081501dc22218cfc22f9992c098f7e3f5e0531139",
+    strip_prefix = "node-v16.9.1-linux-x64/",
     type = "tar.gz",
-    urls = ["https://nodejs.org/dist/v10.24.1/node-v10.24.1-linux-arm64.tar.gz"],
+    urls = ["https://nodejs.org/dist/v16.9.1/node-v16.9.1-linux-x64.tar.gz"],
 )
 
 http_archive(
     name = "nodejs12_arm64",
     build_file = "//nodejs:BUILD.nodejs",
-    sha256 = "bfb436a87142e9dc73ed675c81c267490e575f9abfbbc7fa5db227a2ab6b555c",
-    strip_prefix = "node-v12.22.5-linux-arm64/",
+    sha256 = "f65bf376b6b074b78240ea84d0ab7ca6cacb34c1c066b6653d76045a38565bc2",
+    strip_prefix = "node-v12.22.6-linux-arm64/",
     type = "tar.gz",
-    urls = ["https://nodejs.org/dist/v12.22.5/node-v12.22.5-linux-arm64.tar.gz"],
+    urls = ["https://nodejs.org/dist/v12.22.6/node-v12.22.6-linux-arm64.tar.gz"],
 )
 
 http_archive(
     name = "nodejs14_arm64",
     build_file = "//nodejs:BUILD.nodejs",
-    sha256 = "bee6d7fb5dbdd2931e688b33defd449afdfd9cd6e716975864406cda18daca66",
-    strip_prefix = "node-v14.17.5-linux-arm64/",
+    sha256 = "3355eae15582be48f6be0910e279abbf2324f4538d3ccb2da7e66edab6e6b0fe",
+    strip_prefix = "node-v14.17.6-linux-arm64/",
     type = "tar.gz",
-    urls = ["https://nodejs.org/dist/v14.17.5/node-v14.17.5-linux-arm64.tar.gz"],
+    urls = ["https://nodejs.org/dist/v14.17.6/node-v14.17.6-linux-arm64.tar.gz"],
+)
+
+http_archive(
+    name = "nodejs16_arm64",
+    build_file = "//nodejs:BUILD.nodejs",
+    sha256 = "efad8bf7b7f68addbd47a8268871a10011ff77c31ef33f9d2dadc2ba7939b723",
+    strip_prefix = "node-v16.9.1-linux-arm64/",
+    type = "tar.gz",
+    urls = ["https://nodejs.org/dist/v16.9.1/node-v16.9.1-linux-arm64.tar.gz"],
 )
 
 # For the debug image
@@ -317,9 +361,9 @@ http_file(
 # Docker rules.
 http_archive(
     name = "io_bazel_rules_docker",
-    sha256 = "59d5b42ac315e7eadffa944e86e90c2990110a1c8075f1cd145f487e999d22b3",
-    strip_prefix = "rules_docker-0.17.0",
-    urls = ["https://github.com/bazelbuild/rules_docker/releases/download/v0.17.0/rules_docker-v0.17.0.tar.gz"],
+    sha256 = "1f4e59843b61981a96835dc4ac377ad4da9f8c334ebe5e0bb3f58f80c09735f4",
+    strip_prefix = "rules_docker-0.19.0",
+    urls = ["https://github.com/bazelbuild/rules_docker/releases/download/v0.19.0/rules_docker-v0.19.0.tar.gz"],
 )
 
 load(
