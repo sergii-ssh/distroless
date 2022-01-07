@@ -21,4 +21,4 @@ docker_manifest() {
   docker manifest push $_image
 }
 
-docker_manifest "${HUB}/libc:latest" "amd64 arm64 s390x ppc64le"
+docker_manifest "${HUB}/istio:latest" "amd64 arm64 s390x ppc64le"
