@@ -21,4 +21,6 @@ docker_manifest() {
   docker manifest push $_image
 }
 
-docker_manifest "${HUB}/istio:latest" "amd64 arm64 s390x ppc64le"
+for lib in libc istio_static; do
+  docker_manifest "${HUB}/${lib}:latest" "amd64 arm64 s390x ppc64le"
+done
