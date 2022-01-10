@@ -73,7 +73,7 @@ pkg_tar(
     container_image(
         name = "istio_static" + "_" + arch,
         architecture = arch,
-        base = "//base:base" + "_" + "nonroot" + "_" + arch + "_debian11",
+        base = "//base:static" + "_" + "nonroot" + "_" + arch + "_debian11",
         workdir = ISTIO_WORKDIR,
         tars = [
             ":passwd_tar",
@@ -86,7 +86,7 @@ pkg_tar(
 
 [
     container_image(
-        name = "libc" + "_" + arch,
+        name = "istio_libc" + "_" + arch,
         architecture = arch,
         base = "//istio:istio_static" + "_" + arch,
         debs = [
@@ -99,8 +99,8 @@ pkg_tar(
 container_bundle(
     name = "istio_all",
     images = {
-        "$(HUB)/" + lib + ":latest-" + arch: "//istio:" + lib + "_" + arch
-        for lib in ["istio_static", "libc"]
+        "$(HUB)/distroless-" + lib + ":latest-" + arch: "//istio:istio_" + lib + "_" + arch
+        for lib in ["static", "libc"]
         for arch in ARCHITECTURES
     },
 )
@@ -108,7 +108,7 @@ container_bundle(
 container_bundle(
     name = "istio_static",
     images = {
-        "$(HUB)/libc:latest-" + arch: "//istio:libc_" + arch
+        "$(HUB)/distroless-static:latest-" + arch: "//istio:istio_libc_" + arch
         for arch in ARCHITECTURES
     },
 )
@@ -116,7 +116,7 @@ container_bundle(
 container_bundle(
     name = "istio_libc",
     images = {
-        "$(HUB)/istio_static:latest-" + arch: "//istio:istio_static_" + arch
+        "$(HUB)/distroless-libc:latest-" + arch: "//istio:istio_static_" + arch
         for arch in ARCHITECTURES
     },
 )
