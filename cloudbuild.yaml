@@ -5,7 +5,17 @@ options:
 
 steps:
 
-- name: gcr.io/cloud-marketplace-containers/google/bazel:3.4.1
+# Unfortunately gcr.io/cloud-marketplace-containers/google/bazel is
+# no longer maintained. The cloud-build project is, but does not tag
+# images with bazel versions. The SHA hash was found manually and
+# verified with:
+#
+#   docker pull gcr.io/cloud-builders/bazel
+#   docker run --rm -ti gcr.io/cloud-builders/bazel version
+#   docker image inspect gcr.io/cloud-builders/bazel --format '{{.Id}}'
+#
+# See: https://github.com/GoogleCloudPlatform/cloud-builders/issues/667
+- name: gcr.io/cloud-builders/bazel@sha256:a7ab9f3abba94aad648d5fa9f690d285c0f55d8b20a411a3d53ca22a2ab9ad50
   env:
   - PROJECT_ID=${PROJECT_ID}
   - COMMIT_SHA=${COMMIT_SHA}
@@ -18,9 +28,10 @@ steps:
     set -o errexit
     set -o xtrace
 
+    # package manager needs wget
+    apt-get install wget
+
     # Make sure python points to python3
-    # perhaps the gcr.io/cloud-marketplace-containers/google/bazel image
-    # should be doing this though
     update-alternatives --install /usr/bin/python python /usr/bin/python3 0
 
     bazel build //package_manager:dpkg_parser.par
@@ -52,21 +63,27 @@ steps:
 - name: ubuntu
   entrypoint: ./cloudbuild_jq.sh
 
-- name: gcr.io/projectsigstore/cosign/ci/cosign:3f83940d3f3d97075d606af1e0793051cc6fc19b@sha256:f2d226d35e0fc91bcb207ddffc2b0143b3c6377687a4bc474f2f30a849a7aef3
+- name: gcr.io/projectsigstore/cosign:v1.3.1@sha256:3cd9b3a866579dc2e0cf2fdea547f4c9a27139276cc373165c26842bc594b8bd
   env:
   - PROJECT_ID=${PROJECT_ID}
   - COMMIT_SHA=${COMMIT_SHA}
   - REGISTRY=gcr.io
+  # Workaround for: https://github.com/GoogleContainerTools/distroless/issues/914
+  # /tmp has permissions 777
+  - TUF_ROOT=/tmp
   entrypoint: sh
   args:
   - -c
-  - ./cloudbuild_cosign.sh -key $_KMS_VAL
+  - ./cloudbuild_cosign.sh --key $_KMS_VAL
 
-- name: gcr.io/projectsigstore/cosign/ci/cosign:3f83940d3f3d97075d606af1e0793051cc6fc19b@sha256:f2d226d35e0fc91bcb207ddffc2b0143b3c6377687a4bc474f2f30a849a7aef3
+- name: gcr.io/projectsigstore/cosign:v1.3.1@sha256:3cd9b3a866579dc2e0cf2fdea547f4c9a27139276cc373165c26842bc594b8bd
   env:
   - PROJECT_ID=${PROJECT_ID}
   - COMMIT_SHA=${COMMIT_SHA}
   - REGISTRY=gcr.io
+  # Workaround for: https://github.com/GoogleContainerTools/distroless/issues/914
+  # /tmp has permissions 777
+  - TUF_ROOT=/tmp
   - COSIGN_EXPERIMENTAL=true
   - GOOGLE_SERVICE_ACCOUNT_NAME=keyless@${PROJECT_ID}.iam.gserviceaccount.com
   entrypoint: sh
@@ -85,7 +102,7 @@ steps:
     set -o xtrace
 
     gcloud container clusters get-credentials provenance --zone=us-central1-c --project=${PROJECT_ID}
-    
+
     # Install tkn
     curl -Lo tkn_${_TKN_VERSION}_Linux_arm64.tar.gz  https://github.com/tektoncd/cli/releases/download/v${_TKN_VERSION}/tkn_${_TKN_VERSION}_Linux_x86_64.tar.gz
     tar -xvzf tkn_${_TKN_VERSION}_Linux_arm64.tar.gz -C /usr/local/bin/ tkn

@@ -1,5 +1,5 @@
 {
-    "base-files": "10.3+deb10u10",
+    "base-files": "10.3+deb10u11",
     "ca-certificates": "20200601~deb10u2",
     "dash": "0.5.10.2-5",
     "fontconfig-config": "2.13.1-2",
@@ -38,17 +38,16 @@
     "libssl1.1": "1.1.1d-0+deb10u7",
     "libstdc++6": "8.3.0-6",
     "libtinfo6": "6.1+20181013-2+deb10u2",
-    "libunwind8": "1.2.1-10~deb10u1",
     "libuuid1": "2.33.1-0.1",
     "libxtables12": "1.8.2-4",
     "mime-support": "3.62",
     "netbase": "5.6",
-    "openjdk-11-jdk-headless": "11.0.12+7-2~deb10u1",
-    "openjdk-11-jre-headless": "11.0.12+7-2~deb10u1",
+    "openjdk-11-jdk-headless": "11.0.13+8-1~deb10u1",
+    "openjdk-11-jre-headless": "11.0.13+8-1~deb10u1",
     "openssl": "1.1.1d-0+deb10u7",
     "python3-distutils": "3.7.3-1",
     "python3.7-minimal": "3.7.3-2+deb10u3",
     "readline-common": "7.0-5",
-    "tzdata": "2021a-0+deb10u1",
+    "tzdata": "2021a-0+deb10u3",
     "zlib1g": "1:1.2.11.dfsg-1"
 }

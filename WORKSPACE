@@ -2,13 +2,14 @@ workspace(name = "distroless")
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_file")
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 http_archive(
     name = "io_bazel_rules_go",
-    sha256 = "a8d6b1b354d371a646d2f7927319974e0f9e52f73a2452d2b3877118169eb6bb",
+    sha256 = "e0015762cdeb5a2a9c48f96fb079c6a98e001d44ec23ad4fa2ca27208c5be4fb",
     urls = [
-        "https://mirror.bazel.build/github.com/bazelbuild/rules_go/releases/download/v0.23.3/rules_go-v0.23.3.tar.gz",
-        "https://github.com/bazelbuild/rules_go/releases/download/v0.23.3/rules_go-v0.23.3.tar.gz",
+        "https://mirror.bazel.build/github.com/bazelbuild/rules_go/releases/download/v0.24.14/rules_go-v0.24.14.tar.gz",
+        "https://github.com/bazelbuild/rules_go/releases/download/v0.24.14/rules_go-v0.24.14.tar.gz",
     ],
 )
 
@@ -17,6 +18,22 @@ load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_depe
 go_rules_dependencies()
 
 go_register_toolchains()
+
+# bazel_gazelle is used by rules_docker, and needs to be updated to override the very old version
+# used in that workspace. We must use a version compatible with our version of rules_go. See:
+# https://github.com/bazelbuild/bazel-gazelle#compatibility-with-rules-go
+http_archive(
+    name = "bazel_gazelle",
+    sha256 = "222e49f034ca7a1d1231422cdb67066b885819885c356673cb1f72f748a3c9d4",
+    urls = [
+        "https://mirror.bazel.build/github.com/bazelbuild/bazel-gazelle/releases/download/v0.22.3/bazel-gazelle-v0.22.3.tar.gz",
+        "https://github.com/bazelbuild/bazel-gazelle/releases/download/v0.22.3/bazel-gazelle-v0.22.3.tar.gz",
+    ],
+)
+
+load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
+
+gazelle_dependencies()
 
 load("//package_manager:dpkg.bzl", "dpkg_list", "dpkg_src")
 load(
@@ -99,11 +116,11 @@ load(
 [
     dpkg_list(
         name = "package_bundle_" + arch + "_debian11",
-        # only packages for static and base at the moment
         packages = [
             "base-files",
             "ca-certificates",
             "libc6",
+            "libc-bin",
             "libssl1.1",
             "netbase",
             "openssl",
@@ -122,33 +139,14 @@ load(
             "libgcc-s1",
             "libgomp1",
             "libstdc++6",
-
-            #java
-            "fontconfig-config",
-            "fonts-dejavu-core",
-            "libbrotli1",
-            "libc-bin",
-            "libexpat1",
-            "libfontconfig1",
-            "libfreetype6",
-            "libglib2.0-0",
-            "libgraphite2-3",
-            "libharfbuzz0b",
-            "libjpeg62-turbo",
-            "liblcms2-2",
-            "libpcre3",
-            "libpng16-16",
-            "libuuid1",
-            "openjdk-11-jdk-headless",
-            "openjdk-11-jre-headless",
-            "zlib1g",
-
-            # python
+        ] + ([
+            # python only builds on amd64/arm64
             "dash",
             "libbz2-1.0",
             "libcom-err2",
             "libcrypt1",  # TODO: glibc library for -lcrypt; maybe should be in cc?
             "libdb5.3",
+            "libexpat1",
             "libffi7",
             "libgssapi-krb5-2",
             "libk5crypto3",
@@ -165,9 +163,31 @@ load(
             "libsqlite3-0",
             "libtinfo6",
             "libtirpc3",
+            "libuuid1",
             "python3-distutils",
             "python3.9-minimal",
-        ],
+            "zlib1g",
+            # java only builds on amd64/arm64
+            "fontconfig-config",
+            "fonts-dejavu-core",
+            "libbrotli1",
+            "libexpat1",
+            "libfontconfig1",
+            "libfreetype6",
+            "libglib2.0-0",
+            "libgraphite2-3",
+            "libharfbuzz0b",
+            "libjpeg62-turbo",
+            "liblcms2-2",
+            "libpcre3",
+            "libpng16-16",
+            "libuuid1",
+            "openjdk-11-jdk-headless",
+            "openjdk-11-jre-headless",
+            "openjdk-17-jdk-headless",  # 11 and 17 should share the same "base"
+            "openjdk-17-jre-headless",
+            "zlib1g",
+        ] if arch in BASE_ARCHITECTURES else []),
         sources = [
             "@" + arch + "_debian11_security//file:Packages.json",
             "@" + arch + "_debian11_updates//file:Packages.json",
@@ -182,6 +202,7 @@ load(
         name = "package_bundle_" + arch + "_debian10",
         packages = [
             "libc6",
+            "libc-bin",
             "base-files",
             "ca-certificates",
             "openssl",
@@ -190,7 +211,6 @@ load(
             "libdb5.3",
             "libffi6",
             "liblzma5",
-            "libexpat1",
             "libreadline7",
             "libsqlite3-0",
             "mime-support",
@@ -212,10 +232,24 @@ load(
             "libgcc1",
             "libgomp1",
             "libstdc++6",
-
-            #java
+        ] + ([
+            # python3 only builds on amd64/arm64
+            "dash",
+            "libexpat1",
+            "libmpdec2",
+            "libpython3.7-minimal",
+            "libpython3.7-stdlib",
+            "libtinfo6",
+            "libuuid1",
+            "libncursesw6",
+            "python3-distutils",
+            "python3.7-minimal",
+            "zlib1g",
+        ] if arch in BASE_ARCHITECTURES else []) + ([
+            # java only builds on amd64
             "zlib1g",
             "libjpeg62-turbo",
+            "libexpat1",
             "libpng16-16",
             "liblcms2-2",
             "libfreetype6",
@@ -225,24 +259,12 @@ load(
             "libuuid1",
             "openjdk-11-jre-headless",
             "openjdk-11-jdk-headless",
-            "libc-bin",
             "libgraphite2-3",
             "libharfbuzz0b",
             "libglib2.0-0",
             "libpcre3",
-
-            #python3
-            "dash",
-            "libc-bin",
-            "libmpdec2",
-            "libpython3.7-minimal",
-            "libpython3.7-stdlib",
-            "libtinfo6",
-            "libuuid1",
-            "libncursesw6",
-            "python3-distutils",
-            "python3.7-minimal",
-        ] + (["libunwind8"] if arch in BASE_ARCHITECTURES else []),
+            "zlib1g",
+        ] if arch == "amd64" else []),
         sources = [
             "@" + arch + "_debian10_security//file:Packages.json",
             "@" + arch + "_debian10_updates//file:Packages.json",
@@ -267,55 +289,55 @@ http_archive(
 http_archive(
     name = "nodejs12_amd64",
     build_file = "//nodejs:BUILD.nodejs",
-    sha256 = "6e5ce9cc7dcd31b182730cd662b1813c201fa98089e1013db4abd141716852dc",
-    strip_prefix = "node-v12.22.6-linux-x64/",
+    sha256 = "0c650e494a0ce293fb1220cc81ab5b6b819c249439c392b5ee2e8b812eec5592",
+    strip_prefix = "node-v12.22.7-linux-x64/",
     type = "tar.gz",
-    urls = ["https://nodejs.org/dist/v12.22.6/node-v12.22.6-linux-x64.tar.gz"],
+    urls = ["https://nodejs.org/dist/v12.22.7/node-v12.22.7-linux-x64.tar.gz"],
 )
 
 http_archive(
     name = "nodejs14_amd64",
     build_file = "//nodejs:BUILD.nodejs",
-    sha256 = "19e376214450e93e58687198070b4ab46e42357032ec65f23a7e35b0e86ad6e2",
-    strip_prefix = "node-v14.17.6-linux-x64/",
+    sha256 = "83fa18a0e3642235446b66653eb27c169224ae9c1a15a32d6c3d9ddefb154ed4",
+    strip_prefix = "node-v14.18.2-linux-x64/",
     type = "tar.gz",
-    urls = ["https://nodejs.org/dist/v14.17.6/node-v14.17.6-linux-x64.tar.gz"],
+    urls = ["https://nodejs.org/dist/v14.18.2/node-v14.18.2-linux-x64.tar.gz"],
 )
 
 http_archive(
     name = "nodejs16_amd64",
     build_file = "//nodejs:BUILD.nodejs",
-    sha256 = "1d48c69e4141792f314d29f081501dc22218cfc22f9992c098f7e3f5e0531139",
-    strip_prefix = "node-v16.9.1-linux-x64/",
+    sha256 = "5f80197d654fd0b749cdeddf1f07a5eac1fcf6b423a00ffc8f2d3bea9c6dc8d1",
+    strip_prefix = "node-v16.13.1-linux-x64/",
     type = "tar.gz",
-    urls = ["https://nodejs.org/dist/v16.9.1/node-v16.9.1-linux-x64.tar.gz"],
+    urls = ["https://nodejs.org/dist/v16.13.1/node-v16.13.1-linux-x64.tar.gz"],
 )
 
 http_archive(
     name = "nodejs12_arm64",
     build_file = "//nodejs:BUILD.nodejs",
-    sha256 = "f65bf376b6b074b78240ea84d0ab7ca6cacb34c1c066b6653d76045a38565bc2",
-    strip_prefix = "node-v12.22.6-linux-arm64/",
+    sha256 = "76fa99531cc57982e9a469babb03a7bd1c47d9392cb6d4b0d55f55858c4ed5a0",
+    strip_prefix = "node-v12.22.7-linux-arm64/",
     type = "tar.gz",
-    urls = ["https://nodejs.org/dist/v12.22.6/node-v12.22.6-linux-arm64.tar.gz"],
+    urls = ["https://nodejs.org/dist/v12.22.7/node-v12.22.7-linux-arm64.tar.gz"],
 )
 
 http_archive(
     name = "nodejs14_arm64",
     build_file = "//nodejs:BUILD.nodejs",
-    sha256 = "3355eae15582be48f6be0910e279abbf2324f4538d3ccb2da7e66edab6e6b0fe",
-    strip_prefix = "node-v14.17.6-linux-arm64/",
+    sha256 = "e78e18e01a08b2459d738fc5fec6bd79f2b3dccf85e5122cd646b3385964bc1e",
+    strip_prefix = "node-v14.18.2-linux-arm64/",
     type = "tar.gz",
-    urls = ["https://nodejs.org/dist/v14.17.6/node-v14.17.6-linux-arm64.tar.gz"],
+    urls = ["https://nodejs.org/dist/v14.18.2/node-v14.18.2-linux-arm64.tar.gz"],
 )
 
 http_archive(
     name = "nodejs16_arm64",
     build_file = "//nodejs:BUILD.nodejs",
-    sha256 = "efad8bf7b7f68addbd47a8268871a10011ff77c31ef33f9d2dadc2ba7939b723",
-    strip_prefix = "node-v16.9.1-linux-arm64/",
+    sha256 = "c2f2a0a5adbfc267dbe41ef9fbd83af157a64997bc7546c12717ff55ea6b57d8",
+    strip_prefix = "node-v16.13.1-linux-arm64/",
     type = "tar.gz",
-    urls = ["https://nodejs.org/dist/v16.9.1/node-v16.9.1-linux-arm64.tar.gz"],
+    urls = ["https://nodejs.org/dist/v16.13.1/node-v16.13.1-linux-arm64.tar.gz"],
 )
 
 # For the debug image
@@ -361,9 +383,9 @@ http_file(
 # Docker rules.
 http_archive(
     name = "io_bazel_rules_docker",
-    sha256 = "1f4e59843b61981a96835dc4ac377ad4da9f8c334ebe5e0bb3f58f80c09735f4",
-    strip_prefix = "rules_docker-0.19.0",
-    urls = ["https://github.com/bazelbuild/rules_docker/releases/download/v0.19.0/rules_docker-v0.19.0.tar.gz"],
+    sha256 = "92779d3445e7bdc79b961030b996cb0c91820ade7ffa7edca69273f404b085d5",
+    strip_prefix = "rules_docker-0.20.0",
+    urls = ["https://github.com/bazelbuild/rules_docker/releases/download/v0.20.0/rules_docker-v0.20.0.tar.gz"],
 )
 
 load(
