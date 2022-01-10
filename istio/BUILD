@@ -138,29 +138,30 @@ pkg_tar(
     for arch in ARCHITECTURES
 ]
 
-container_bundle(
-    name = "istio_all",
-    images = {
-        "$(HUB)/distroless-" + lib + ":latest-" + arch: "//istio:istio_" + lib + "_" + arch
-        for lib in ["static", "libc"]
-        for arch in ARCHITECTURES
-    },
-)
-
+istio_static_images = {
+    "$(HUB)/istio-static:latest-" + arch: "//istio:istio_static_" + arch
+    for arch in ARCHITECTURES
+}
 container_bundle(
     name = "istio_static",
-    images = {
-        "$(HUB)/distroless-static:latest-" + arch: "//istio:istio_libc_" + arch
-        for arch in ARCHITECTURES
-    },
+    images = istio_static_images,
 )
 
+istio_libc_images = {
+    "$(HUB)/libc:latest-" + arch: "//istio:istio_libc_" + arch
+    for arch in ARCHITECTURES
+}
 container_bundle(
     name = "istio_libc",
-    images = {
-        "$(HUB)/distroless-libc:latest-" + arch: "//istio:istio_static_" + arch
-        for arch in ARCHITECTURES
-    },
+    images = istio_libc_images,
+)
+
+ALL={}
+ALL.update(istio_static_images)
+ALL.update(istio_libc_images)
+container_bundle(
+    name = "istio_all",
+    images = ALL,
 )
 
 [

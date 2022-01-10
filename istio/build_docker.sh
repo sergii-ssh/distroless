@@ -21,6 +21,6 @@ docker_manifest() {
   docker manifest push $_image
 }
 
-for lib in libc static; do
-  docker_manifest "${HUB}/distroless-${lib}:latest" "amd64 arm64 s390x ppc64le"
+for lib in libc istio-static; do
+  docker_manifest "${HUB}/${lib}:latest" "amd64 arm64 s390x ppc64le"
 done
