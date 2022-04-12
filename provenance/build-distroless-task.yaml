@@ -51,18 +51,8 @@ spec:
         # Make sure python points to python3
         update-alternatives --install /usr/bin/python python /usr/bin/python3 0
 
-        bazel build //package_manager:dpkg_parser.par
-
-        bazel build --jobs=1 @package_bundle_amd64_debian10//file:packages.bzl
-        bazel build --jobs=1 @package_bundle_arm_debian10//file:packages.bzl
-        bazel build --jobs=1 @package_bundle_arm64_debian10//file:packages.bzl
-        bazel build --jobs=1 @package_bundle_s390x_debian10//file:packages.bzl
-        bazel build --jobs=1 @package_bundle_ppc64le_debian10//file:packages.bzl
-        bazel build --jobs=1 @package_bundle_amd64_debian11//file:packages.bzl
-        bazel build --jobs=1 @package_bundle_arm_debian11//file:packages.bzl
-        bazel build --jobs=1 @package_bundle_arm64_debian11//file:packages.bzl
-        bazel build --jobs=1 @package_bundle_s390x_debian11//file:packages.bzl
-        bazel build --jobs=1 @package_bundle_ppc64le_debian11//file:packages.bzl
+        # fetch all dependencies with retries and backoff
+        for i in $(seq 5); do bazel fetch --loading_phase_threads=1 //... && break || sleep 20; done
 
         bazel build all.tar
         
@@ -70,5 +60,3 @@ spec:
         ./cloudbuild_jq.sh
 
         bazel run //:publish
-
-

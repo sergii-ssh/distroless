@@ -1,17 +1,19 @@
 package(default_visibility = ["//visibility:public"])
 
-load("//base:distro.bzl", "DISTRO_PACKAGES", "DISTRO_SUFFIXES")
 load("@io_bazel_rules_docker//container:container.bzl", "container_bundle", "container_image")
 load("//:checksums.bzl", "ARCHITECTURES")
-load("//base:base.bzl", "NONROOT")
+load("//base:base.bzl", "NONROOT", "deb_file")
 load("@bazel_tools//tools/build_defs/pkg:pkg.bzl", "pkg_tar")
 load("@io_bazel_rules_docker//contrib:group.bzl", "group_entry", "group_file")
 load("@io_bazel_rules_docker//contrib:passwd.bzl", "passwd_entry", "passwd_tar")
 load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
 
 NOBODY = 65534
+
 ISTIO_WORKDIR = "/"
+
 ISTIO_PROXY = "istio-proxy"
+
 ISTIO_PROXY_UID = 1337
 
 # Create a passwd file with a nonroot and istio-proxy users and uids.
@@ -38,10 +40,10 @@ passwd_entry(
 passwd_entry(
     name = "istio_proxy_user",
     gid = ISTIO_PROXY_UID,
-    uid = ISTIO_PROXY_UID,
     home = "/home/istio-proxy",
     info = "istio-proxy",
     shell = "/sbin/nologin",
+    uid = ISTIO_PROXY_UID,
     username = ISTIO_PROXY,
 )
 
@@ -116,12 +118,12 @@ pkg_tar(
         name = "istio_static" + "_" + arch,
         architecture = arch,
         base = "//base:static" + "_" + "nonroot" + "_" + arch + "_debian11",
-        workdir = ISTIO_WORKDIR,
         tars = [
             ":passwd",
             ":group_tar",
         ],
         user = ISTIO_PROXY,
+        workdir = ISTIO_WORKDIR,
     )
     for arch in ARCHITECTURES
 ]
@@ -132,7 +134,7 @@ pkg_tar(
         architecture = arch,
         base = "//istio:istio_static" + "_" + arch,
         debs = [
-            DISTRO_PACKAGES[arch]["_debian11"]["libc6"],
+            deb_file(arch, "debian11", "libc6"),
         ],
     )
     for arch in ARCHITECTURES
@@ -142,6 +144,7 @@ istio_static_images = {
     "$(HUB)/istio-static:latest-" + arch: "//istio:istio_static_" + arch
     for arch in ARCHITECTURES
 }
+
 container_bundle(
     name = "istio_static",
     images = istio_static_images,
@@ -151,14 +154,18 @@ istio_libc_images = {
     "$(HUB)/libc:latest-" + arch: "//istio:istio_libc_" + arch
     for arch in ARCHITECTURES
 }
+
 container_bundle(
     name = "istio_libc",
     images = istio_libc_images,
 )
 
-ALL={}
+ALL = {}
+
 ALL.update(istio_static_images)
+
 ALL.update(istio_libc_images)
+
 container_bundle(
     name = "istio_all",
     images = ALL,
@@ -171,7 +178,10 @@ container_bundle(
         image = ":istio_" + lib + "_" + arch,
         tags = [arch],
     )
-    for lib in ["static", "libc"]
+    for lib in [
+        "static",
+        "libc",
+    ]
     for arch in ARCHITECTURES
 ]
 
