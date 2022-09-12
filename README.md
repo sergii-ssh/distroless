@@ -21,6 +21,23 @@ That's about 50% of the size of `alpine` (~5 MiB), and less than 2% of the size 
 
 These images are built using [bazel](https://bazel.build), but they can also be used through other Docker image build tooling.
 
+### What images are available?
+
+The following images are currently published and updated by the distroless project
+
+| Image                                 | Tags                                                    |
+| ---                                   | ---                                                     |
+| gcr.io/distroless/static-debian11     | latest, nonroot, debug, debug-nonroot                   |
+| gcr.io/distroless/base-debian11       | latest, nonroot, debug, debug-nonroot                   |
+| gcr.io/distroless/cc-debian11         | latest, nonroot, debug, debug-nonroot                   |
+| gcr.io/distroless/python3-debian11    | latest, nonroot, debug, debug-nonroot                   |
+| gcr.io/distroless/java-base-debian11  | latest, nonroot, debug, debug-nonroot                   |
+| gcr.io/distroless/java11-debian11     | latest, nonroot, debug, debug-nonroot                   |
+| gcr.io/distroless/java17-debian11     | latest, nonroot, debug, debug-nonroot                   |
+| gcr.io/distroless/nodejs-debian11     | 14, 14-debug, 16, 16-debug, 18, 18-debug, latest, debug |
+
+Any other tags are considered deprecated and are no longer updated
+
 ## How do I verify distroless images?
 
 All distroless images are signed by [cosign](https://github.com/sigstore/cosign).
@@ -85,17 +102,16 @@ Follow these steps to get started:
 
   ```dockerfile
   # Start by building the application.
-  FROM golang:1.17-bullseye as build
+  FROM golang:1.18 as build
 
   WORKDIR /go/src/app
-  ADD . /go/src/app
+  COPY . .
 
-  RUN go get -d -v ./...
-
-  RUN go build -o /go/bin/app
+  RUN go mod download
+  RUN CGO_ENABLED=0 go build -o /go/bin/app
 
   # Now copy it into our base image.
-  FROM gcr.io/distroless/base-debian11
+  FROM gcr.io/distroless/static-debian11
   COPY --from=build /go/bin/app /
   CMD ["/app"]
   ```
@@ -156,7 +172,7 @@ For full documentation on how to use Jib to generate Docker images from Maven an
 
 ### Base Operating System
 
-Distroless images are based on Debian 11 (bullseye). Images are explicitly tagged with Debian version suffixes (e.g. `-debian10` or `-debian11`). Specifying an image without the distribution will currently select `-debian11` images, but that will change in the future to a newer version of Debian. It can be useful to reference the distribution explicitly, to prevent breaking builds when the next Debian version is released.
+Distroless images are based on Debian 11 (bullseye). Images are explicitly tagged with Debian version suffixes (e.g. `-debian11`). Specifying an image without the distribution will currently select `-debian11` images, but that will change in the future to a newer version of Debian. It can be useful to reference the distribution explicitly, to prevent breaking builds when the next Debian version is released.
 
 ### Operating System Updates for Security Fixes and CVEs
 
