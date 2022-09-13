@@ -138,7 +138,7 @@ JAVA_VERSIONS = [
         "",
         "_debug",
     ]
-    for arch in ARCHITECTURES
+    for arch in JAVA_ARCHITECTURES
     for user in USERS
     for distro in DISTROS
 ]

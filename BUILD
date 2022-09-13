@@ -12,7 +12,6 @@ LABEL_USERS = [
 STATIC = dict({
     "{REGISTRY}/{PROJECT_ID}/static:{COMMIT_SHA}": "//base:static_root_amd64_debian11",
     "{REGISTRY}/{PROJECT_ID}/static-debian11:{COMMIT_SHA}": "//base:static_root_amd64_debian11",
-    "{REGISTRY}/{PROJECT_ID}/static-debian10:{COMMIT_SHA}": "//base:static_root_amd64_debian10",
 })
 
 STATIC.update({
@@ -41,7 +40,6 @@ STATIC.update({
 BASE = {
     "{REGISTRY}/{PROJECT_ID}/base:{COMMIT_SHA}": "//base:base_root_amd64_debian11",
     "{REGISTRY}/{PROJECT_ID}/base-debian11:{COMMIT_SHA}": "//base:base_root_amd64_debian11",
-    "{REGISTRY}/{PROJECT_ID}/base-debian10:{COMMIT_SHA}": "//base:base_root_amd64_debian10",
 }
 
 BASE.update({
@@ -70,7 +68,6 @@ BASE.update({
 CC = {
     "{REGISTRY}/{PROJECT_ID}/cc:{COMMIT_SHA}": "//cc:cc_root_amd64_debian11",
     "{REGISTRY}/{PROJECT_ID}/cc-debian11:{COMMIT_SHA}": "//cc:cc_root_amd64_debian11",
-    "{REGISTRY}/{PROJECT_ID}/cc-debian10:{COMMIT_SHA}": "//cc:cc_root_amd64_debian10",
 }
 
 CC.update({
@@ -164,7 +161,7 @@ JAVA_BASE = {
 
 JAVA_BASE.update({
     "{REGISTRY}/{PROJECT_ID}/java-base-debian11:" + tag_base + "-" + arch: "//java:java_base_" + label + "_" + arch + "_debian11"
-    for arch in BASE_ARCHITECTURES
+    for arch in JAVA_ARCHITECTURES
     for (tag_base, label) in [
         ("latest", "root"),
         ("nonroot", "nonroot"),
@@ -188,7 +185,7 @@ JAVA11.update({
         ("debug", "debug_root"),
         ("debug-nonroot", "debug_nonroot"),
     ]
-    for arch in BASE_ARCHITECTURES
+    for arch in JAVA_ARCHITECTURES
 })
 
 JAVA17 = {
@@ -206,7 +203,7 @@ JAVA17.update({
         ("debug", "debug_root"),
         ("debug-nonroot", "debug_nonroot"),
     ]
-    for arch in BASE_ARCHITECTURES
+    for arch in JAVA_ARCHITECTURES
 })
 
 # these are existing legacy tags that are scheduled to be removed
@@ -265,8 +262,6 @@ ALL.update(JAVA_BASE)
 ALL.update(JAVA11)
 
 ALL.update(JAVA17)
-
-ALL.update(LEGACY_JAVA_TAGS)
 
 ALL.update(JETTY)
 
