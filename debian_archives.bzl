@@ -53,7 +53,7 @@ def repositories():
     http_file(
         name = "amd64_debian11_libc-bin",
         downloaded_file_path = "libc-bin_2.35-4_amd64.deb",
-        urls = ["https://snapshot.debian.org/archive/debian/20220911T211006Z/pool/main/g/glibc/libc-bin_2.35-4_amd64.deb"],
+        urls = ["https://snapshot.debian.org/archive/debian/20221027T213940Z/pool/main/g/glibc/libc-bin_2.35-4_amd64.deb"],
     )
     http_file(
         name = "amd64_debian11_libc6",
@@ -381,12 +381,12 @@ def repositories():
     http_file(
         name = "arm_debian11_libc-bin",
         downloaded_file_path = "libc-bin_2.35-4_armhf.deb",
-        urls = ["https://snapshot.debian.org/archive/debian/20220911T211006Z/pool/main/g/glibc/libc-bin_2.35-4_armhf.deb"],
+        urls = ["https://snapshot.debian.org/archive/debian/20221027T213940Z/pool/main/g/glibc/libc-bin_2.35-4_armhf.deb"],
     )
     http_file(
         name = "arm_debian11_libc6",
         downloaded_file_path = "libc6_2.35-4_armhf.deb",
-        urls = ["https://snapshot.debian.org/archive/debian/20220911T211006Z/pool/main/g/glibc/libc6_2.35-4_armhf.deb"],
+        urls = ["https://snapshot.debian.org/archive/debian/20221027T213940Z/pool/main/g/glibc/libc6_2.35-4_armhf.deb"],
     )
     http_file(
         name = "arm_debian11_libgcc-s1",
@@ -517,12 +517,12 @@ def repositories():
     http_file(
         name = "arm64_debian11_libc-bin",
         downloaded_file_path = "libc-bin_2.35-4_arm64.deb",
-        urls = ["https://snapshot.debian.org/archive/debian/20220911T211006Z/pool/main/g/glibc/libc-bin_2.35-4_arm64.deb"],
+        urls = ["https://snapshot.debian.org/archive/debian/20221027T213940Z/pool/main/g/glibc/libc-bin_2.35-4_arm64.deb"],
     )
     http_file(
         name = "arm64_debian11_libc6",
         downloaded_file_path = "libc6_2.35-4_arm64.deb",
-        urls = ["https://snapshot.debian.org/archive/debian/20220911T211006Z/pool/main/g/glibc/libc6_2.35-4_arm64.deb"],
+        urls = ["https://snapshot.debian.org/archive/debian/20221027T213940Z/pool/main/g/glibc/libc6_2.35-4_arm64.deb"],
     )
     http_file(
         name = "arm64_debian11_libcom-err2",
@@ -863,12 +863,12 @@ def repositories():
     http_file(
         name = "ppc64le_debian11_libc-bin",
         downloaded_file_path = "libc-bin_2.35-4_ppc64el.deb",
-        urls = ["https://snapshot.debian.org/archive/debian/20220911T211006Z/pool/main/g/glibc/libc-bin_2.35-4_ppc64el.deb"],
+        urls = ["https://snapshot.debian.org/archive/debian/20221027T213940Z/pool/main/g/glibc/libc-bin_2.35-4_ppc64el.deb"],
     )
     http_file(
         name = "ppc64le_debian11_libc6",
         downloaded_file_path = "libc6_2.35-4_ppc64el.deb",
-        urls = ["https://snapshot.debian.org/archive/debian/20220911T211006Z/pool/main/g/glibc/libc6_2.35-4_ppc64el.deb"],
+        urls = ["https://snapshot.debian.org/archive/debian/20221027T213940Z/pool/main/g/glibc/libc6_2.35-4_ppc64el.deb"],
     )
     http_file(
         name = "ppc64le_debian11_libcrypt1",
@@ -1089,12 +1089,12 @@ def repositories():
     http_file(
         name = "s390x_debian11_libc-bin",
         downloaded_file_path = "libc-bin_2.35-4_s390x.deb",
-        urls = ["https://snapshot.debian.org/archive/debian/20220911T211006Z/pool/main/g/glibc/libc-bin_2.35-4_s390x.deb"],
+        urls = ["https://snapshot.debian.org/archive/debian/20221027T213940Z/pool/main/g/glibc/libc-bin_2.35-4_s390x.deb"],
     )
     http_file(
         name = "s390x_debian11_libc6",
         downloaded_file_path = "libc6_2.35-4_s390x.deb",
-        urls = ["https://snapshot.debian.org/archive/debian/20220911T211006Z/pool/main/g/glibc/libc6_2.35-4_s390x.deb"],
+        urls = ["https://snapshot.debian.org/archive/debian/20221027T213940Z/pool/main/g/glibc/libc6_2.35-4_s390x.deb"],
     )
     http_file(
         name = "s390x_debian11_libcrypt1",
