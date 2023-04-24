@@ -55,5 +55,6 @@ load("//private/oci:defs.bzl", "sign_and_push_all")
 oci_push(
     name = "publish",
     image = ":iptables",
-    repository = "$(HUB)/iptables",
+    repository = "${HUB}/iptables",
+    default_tags = ["latest"]
 )
