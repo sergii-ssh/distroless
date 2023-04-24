@@ -14,6 +14,5 @@ BASE_ARCHITECTURES = ["amd64", "arm64"]
 ARCHITECTURES = BASE_ARCHITECTURES + ["arm", "s390x", "ppc64le"]
 
 VERSIONS = [
-    ("debian10", "buster", "10"),
     ("debian11", "bullseye", "11"),
 ]

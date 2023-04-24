@@ -18,22 +18,22 @@ package deb
 import (
 	"fmt"
 	"io"
-	"net/http"
 	"regexp"
 	"time"
 
 	"github.com/GoogleContainerTools/distroless/debian_package_manager/internal/build/config"
+	"github.com/GoogleContainerTools/distroless/debian_package_manager/internal/rhttp"
 	"github.com/pkg/errors"
 )
 
 func LatestSnapshot() (*config.Snapshots, error) {
-	snapshotURL := "https://snapshot.debian.org/archive/debian/?year=%d;month=%d"
+	snapshotURL := "https://snapshot.debian.org/archive/debian/?year=%d&month=%d"
 	s, err := latest(snapshotURL)
 	if err != nil {
 		return nil, errors.Wrap(err, "calculating latest snapshot")
 	}
 
-	securitySnapshotURL := "https://snapshot.debian.org/archive/debian-security/?year=%d;month=%d"
+	securitySnapshotURL := "https://snapshot.debian.org/archive/debian-security/?year=%d&month=%d"
 	ss, err := latest(securitySnapshotURL)
 	if err != nil {
 		return nil, errors.Wrap(err, "calculating latest security snapshot")
@@ -55,7 +55,7 @@ var (
 func latest(urltemplate string) (string, error) {
 	year, month, _ := time.Now().Date()
 	snapshotURL := fmt.Sprintf(urltemplate, year, month)
-	resp, err := http.Get(snapshotURL)
+	resp, err := rhttp.Get(snapshotURL)
 	if err != nil {
 		return "", err
 	}
@@ -82,6 +82,7 @@ func Main(snapshot string, arch config.Arch, distro config.Distro) *PackageIndex
 		Snapshot: snapshot,
 		Distro:   distro,
 		Arch:     arch,
+		Channel:  "main",
 	}
 }
 
@@ -92,6 +93,7 @@ func Updates(snapshot string, arch config.Arch, distro config.Distro) *PackageIn
 		Snapshot: snapshot,
 		Distro:   distro,
 		Arch:     arch,
+		Channel:  "updates",
 	}
 }
 
@@ -106,5 +108,6 @@ func Security(snapshot string, arch config.Arch, distro config.Distro) *PackageI
 		Snapshot: snapshot,
 		Distro:   distro,
 		Arch:     arch,
+		Channel:  "security",
 	}
 }
