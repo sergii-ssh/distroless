@@ -1,4 +1,4 @@
-# "Distroless" Container Images
+# "Distroless" Container Images.
 
 [![CI Build Status](https://github.com/GoogleContainerTools/distroless/actions/workflows/ci.yaml/badge.svg)](https://github.com/GoogleContainerTools/distroless/actions/workflows/ci.yaml)
 
@@ -6,6 +6,9 @@
 They do not contain package managers, shells or any other programs you would expect to find in a standard Linux distribution.
 
 For more information, see this [talk](https://swampup2017.sched.com/event/A6CW/distroless-docker-containerizing-apps-not-vms?iframe=no&w=100%&sidebar=yes&bg=no) ([video](https://www.youtube.com/watch?v=lviLZFciDv4)).
+
+**Since March 2023, Distroless images use oci manifests, if you see errors referencing `application/vnd.oci.image.manifest.v1+json`
+or `application/vnd.oci.image.index.v1+json`, update your container tooling (docker, jib, etc) to latest.**
 
 ## Why should I use distroless images?
 
@@ -25,16 +28,20 @@ These images are built using [bazel](https://bazel.build), but they can also be 
 
 The following images are currently published and updated by the distroless project
 
-| Image                                 | Tags                                                    |
-| ---                                   | ---                                                     |
-| gcr.io/distroless/static-debian11     | latest, nonroot, debug, debug-nonroot                   |
-| gcr.io/distroless/base-debian11       | latest, nonroot, debug, debug-nonroot                   |
-| gcr.io/distroless/cc-debian11         | latest, nonroot, debug, debug-nonroot                   |
-| gcr.io/distroless/python3-debian11    | latest, nonroot, debug, debug-nonroot                   |
-| gcr.io/distroless/java-base-debian11  | latest, nonroot, debug, debug-nonroot                   |
-| gcr.io/distroless/java11-debian11     | latest, nonroot, debug, debug-nonroot                   |
-| gcr.io/distroless/java17-debian11     | latest, nonroot, debug, debug-nonroot                   |
-| gcr.io/distroless/nodejs-debian11     | 14, 14-debug, 16, 16-debug, 18, 18-debug, latest, debug |
+| Image                                 | Tags                                   |
+| ---                                   | ---                                    |
+| gcr.io/distroless/static-debian11     | latest, nonroot, debug, debug-nonroot  |
+| gcr.io/distroless/base-debian11       | latest, nonroot, debug, debug-nonroot  |
+| gcr.io/distroless/base-nossl-debian11 | latest, nonroot, debug, debug-nonroot  |
+| gcr.io/distroless/cc-debian11         | latest, nonroot, debug, debug-nonroot  |
+| gcr.io/distroless/python3-debian11    | latest, nonroot, debug, debug-nonroot  |
+| gcr.io/distroless/java-base-debian11  | latest, nonroot, debug, debug-nonroot  |
+| gcr.io/distroless/java11-debian11     | latest, nonroot, debug, debug-nonroot  |
+| gcr.io/distroless/java17-debian11     | latest, nonroot, debug, debug-nonroot  |
+| gcr.io/distroless/nodejs14-debian11   | latest, nonroot, debug, debug-nonroot  |
+| gcr.io/distroless/nodejs16-debian11   | latest, nonroot, debug, debug-nonroot  |
+| gcr.io/distroless/nodejs18-debian11   | latest, nonroot, debug, debug-nonroot  |
+| gcr.io/distroless/nodejs20-debian11   | latest, nonroot, debug, debug-nonroot  |
 
 Any other tags are considered deprecated and are no longer updated
 
@@ -43,7 +50,15 @@ Any other tags are considered deprecated and are no longer updated
 All distroless images are signed by [cosign](https://github.com/sigstore/cosign).
 We recommend verifying any distroless image you use before building your image.
 
-Once you've installed cosign, you can use the [distroless public key](cosign.pub) to verify any distroless image with:
+#### Keyless (recommended)
+Distroless images are signed with cosign in keyless mode.  You can verify the keyless signature of any distroless image with:
+
+```
+cosign verify $IMAGE_NAME --certificate-oidc-issuer https://accounts.google.com  --certificate-identity keyless@distroless.iam.gserviceaccount.com
+```
+
+#### Key (no tlog, deprecated, EOL Sept 2023)
+Verifying using the distroless keys is deprecated in favor of keyless. These signing events are not uploaded to the transparency log. You can use the [distroless public key](cosign.pub) to verify any distroless image with:
 
 ```
 cat cosign.pub
@@ -52,8 +67,7 @@ MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEWZzVzkb8A+DbgDpaJId/bOmV8n7Q
 OqxYbK0Iro6GzSmOzxkn+N2AKawLyXi84WSwJQBK//psATakCgAQKkNTAA==
 -----END PUBLIC KEY-----
 
-
-cosign verify --key cosign.pub $IMAGE_NAME
+cosign verify --key cosign.pub $IMAGE_NAME --insecure-ignore-tlog
 ```
 
 ### Entrypoints
@@ -73,7 +87,8 @@ But this does not work:
 ENTRYPOINT "myapp"
 ```
 
-For the same reasons, if the entrypoint is left to the default empty vector, the CMD command should be specified in `vector` form (see examples below).
+For the same reasons, if the entrypoint is set to the empty vector, the CMD command should be specified in `vector` form (see examples below).
+Note that by default static, base and cc images have the empty vector entrypoint. Images with an included language runtime have a language specific default (see: [java](java/README.md#usage), [nodejs](nodejs/README.md#usage), [python3](experimental/python3/README.md#usage)).
 
 ### Docker
 
@@ -87,7 +102,10 @@ Follow these steps to get started:
     * [gcr.io/distroless/java11-debian11](java/README.md)
     * [gcr.io/distroless/java17-debian11](java/README.md)
     * [gcr.io/distroless/cc-debian11](cc/README.md)
-    * [gcr.io/distroless/nodejs-debian11](nodejs/README.md)
+    * [gcr.io/distroless/nodejs14-debian11](nodejs/README.md)
+    * [gcr.io/distroless/nodejs16-debian11](nodejs/README.md)
+    * [gcr.io/distroless/nodejs18-debian11](nodejs/README.md)
+    * [gcr.io/distroless/nodejs20-debian11](nodejs/README.md)
 
 * The following images are also published on `gcr.io`, but are considered experimental and not recommended for production usage:
     * [gcr.io/distroless/python3-debian11](experimental/python3/README.md)
@@ -142,9 +160,10 @@ This should expose the Express application to your localhost:3000
 
 ### Bazel
 
-For full documentation on how to use bazel to generate Docker images, see the [bazelbuild/rules_docker](http://github.com/bazelbuild/rules_docker) repository.
+For full documentation on how to use bazel to generate Container images, see the [bazel-contrib/rules_oci](https://github.com/bazel-contrib/rules_oci) repository.
 
-For documentation and examples on how to use the bazel package manager rules, see [./package_manager](./package_manager)
+For documentation and example on how to use the go-based debian package manager (current) to generate bazel config, see [./debian_package_manager](./debian_package_manager)
+For documentation and examples on how to use the bazel package manager rules (not used in this repo), see [./package_manager](./package_manager)
 
 Examples can be found in this repository in the [examples](examples/) directory.
 
@@ -161,14 +180,10 @@ See here for:
 See here for examples on how to complete some common tasks in your image:
 
 * [Adding and running as a non-root user](examples/nonroot)
-* [Including debian packages](https://github.com/bazelbuild/rules_docker#container_image-1)
+* Including debian packages (TBD, currently in [private](./private/remote/debian_archive.bzl))
 * [Including CA certificates](cacerts/)
 
 See here for more information on how these images are [built and released](RELEASES.md).
-
-### Jib
-
-For full documentation on how to use Jib to generate Docker images from Maven and Gradle, see the [GoogleContainerTools/jib](http://github.com/GoogleContainerTools/jib) repository.
 
 ### Base Operating System
 

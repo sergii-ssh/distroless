@@ -3,11 +3,11 @@ commandTests:
   - name: java
     command: "/usr/lib/jvm/java-17-openjdk-amd64/bin/java"
     args: ["-version"]
-    expectedError: ['openjdk version "17.0.2" 2022-01-18']
+    expectedError: ['openjdk version "17.0.6" 2023-01-17']
   - name: java-symlink
     command: "/usr/bin/java"
     args: ["-version"]
-    expectedError: ['openjdk version "17.0.2" 2022-01-18']
+    expectedError: ['openjdk version "17.0.6" 2023-01-17']
 fileExistenceTests:
   - name: certs
     path: "/etc/ssl/certs/java/cacerts"
@@ -22,6 +22,6 @@ fileExistenceTests:
     path: "/usr/lib/jvm/java-17-openjdk-amd64/bin/javac"
     shouldExist: false
 metadataTest:
-  env:
+  envVars:
     - key: 'JAVA_VERSION'
-      value: '17.0.2'
+      value: '17.0.6'
