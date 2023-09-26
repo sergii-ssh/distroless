@@ -15,6 +15,7 @@ STATIC_VARIANTS = [
 STATIC = {
     "{REGISTRY}/{PROJECT_ID}/static:{COMMIT_SHA}": "//base:static_root_amd64_debian11",
     "{REGISTRY}/{PROJECT_ID}/static-debian11:{COMMIT_SHA}": "//base:static_root_amd64_debian11",
+    "{REGISTRY}/{PROJECT_ID}/static-debian12:{COMMIT_SHA}": "//base:static_root_amd64_debian12",
 }
 
 STATIC |= {
@@ -54,6 +55,7 @@ BASE_VARIANTS = [
 BASE = {
     "{REGISTRY}/{PROJECT_ID}/base:{COMMIT_SHA}": "//base:base_root_amd64_debian11",
     "{REGISTRY}/{PROJECT_ID}/base-debian11:{COMMIT_SHA}": "//base:base_root_amd64_debian11",
+    "{REGISTRY}/{PROJECT_ID}/base-debian12:{COMMIT_SHA}": "//base:base_root_amd64_debian12",
 }
 
 BASE |= {
@@ -93,6 +95,7 @@ BASE_NOSSL_VARIANTS = [
 BASE_NOSSL = {
     "{REGISTRY}/{PROJECT_ID}/base-nossl:{COMMIT_SHA}": "//base:base_nossl_root_amd64_debian11",
     "{REGISTRY}/{PROJECT_ID}/base-nossl-debian11:{COMMIT_SHA}": "//base:base_nossl_root_amd64_debian11",
+    "{REGISTRY}/{PROJECT_ID}/base-nossl-debian12:{COMMIT_SHA}": "//base:base_nossl_root_amd64_debian12",
 }
 
 BASE_NOSSL |= {
@@ -132,6 +135,7 @@ CC_VARIANTS = [
 CC = {
     "{REGISTRY}/{PROJECT_ID}/cc:{COMMIT_SHA}": "//cc:cc_root_amd64_debian11",
     "{REGISTRY}/{PROJECT_ID}/cc-debian11:{COMMIT_SHA}": "//cc:cc_root_amd64_debian11",
+    "{REGISTRY}/{PROJECT_ID}/cc-debian12:{COMMIT_SHA}": "//cc:cc_root_amd64_debian12",
 }
 
 CC |= {
@@ -184,20 +188,18 @@ PYTHON3 |= {
     "{REGISTRY}/{PROJECT_ID}/python3-" + distro + ":" + tag_base + "-" + arch: "//experimental/python3:" + label + "_" + user + "_" + arch + "_" + distro
     for arch in BASE_ARCHITECTURES
     for (tag_base, label, user) in PYTHON3_VARIATIONS
-    for distro in LANGUAGE_DISTROS
+    for distro in DISTROS
 }
 
 # oci_image_index
 PYTHON3 |= {
     "{REGISTRY}/{PROJECT_ID}/python3-" + distro + ":" + tag_base: "//experimental/python3:" + label + "_" + user + "_" + distro
     for (tag_base, label, user) in PYTHON3_VARIATIONS
-    for distro in LANGUAGE_DISTROS
+    for distro in DISTROS
 }
 
 ## NODEJS
 NODEJS_VERSIONS = [
-    "14",
-    "16",
     "18",
     "20",
 ]
@@ -212,15 +214,15 @@ NODEJS_VARIATIONS = [
 NODEJS = {
     "{REGISTRY}/{PROJECT_ID}/nodejs" + version + "-" + distro + ":" + tag_base + "-" + arch: "//nodejs:nodejs" + version + label + "_" + user + "_" + arch + "_" + distro
     for arch in BASE_ARCHITECTURES
-    for distro in LANGUAGE_DISTROS
+    for distro in DISTROS
     for version in NODEJS_VERSIONS
     for (tag_base, label, user) in NODEJS_VARIATIONS
 }
 
 # oci_image_index
-NODEJS = {
+NODEJS |= {
     "{REGISTRY}/{PROJECT_ID}/nodejs" + version + "-" + distro + ":" + tag_base: "//nodejs:nodejs" + version + label + "_" + user + "_" + distro
-    for distro in LANGUAGE_DISTROS
+    for distro in DISTROS
     for version in NODEJS_VERSIONS
     for (tag_base, label, user) in NODEJS_VARIATIONS
 }
@@ -254,9 +256,13 @@ JAVA_BASE_VARIATIONS = [
 
 JAVA_BASE = {
     "{REGISTRY}/{PROJECT_ID}/java-base:latest": "//java:java_base_root_amd64_debian11",
+    "{REGISTRY}/{PROJECT_ID}/java-base-debian12:latest": "//java:java_base_root_amd64_debian12",
     "{REGISTRY}/{PROJECT_ID}/java-base:nonroot": "//java:java_base_nonroot_amd64_debian11",
+    "{REGISTRY}/{PROJECT_ID}/java-base-debian12:nonroot": "//java:java_base_nonroot_amd64_debian12",
     "{REGISTRY}/{PROJECT_ID}/java-base:debug": "//java:java_base_debug_root_amd64_debian11",
+    "{REGISTRY}/{PROJECT_ID}/java-base-debian12:debug": "//java:java_base_debug_root_amd64_debian12",
     "{REGISTRY}/{PROJECT_ID}/java-base:debug-nonroot": "//java:java_base_debug_nonroot_amd64_debian11",
+    "{REGISTRY}/{PROJECT_ID}/java-base-debian12:debug-nonroot": "//java:java_base_debug_nonroot_amd64_debian12",
 }
 
 JAVA_BASE |= {
@@ -265,9 +271,20 @@ JAVA_BASE |= {
     for (tag_base, label) in JAVA_BASE_VARIATIONS
 }
 
+JAVA_BASE |= {
+    "{REGISTRY}/{PROJECT_ID}/java-base-debian12:" + tag_base + "-" + arch: "//java:java_base_" + label + "_" + arch + "_debian12"
+    for arch in JAVA_ARCHITECTURES
+    for (tag_base, label) in JAVA_BASE_VARIATIONS
+}
+
 # oci_image_index
 JAVA_BASE |= {
     "{REGISTRY}/{PROJECT_ID}/java-base-debian11:" + tag_base: "//java:java_base_" + label + "_debian11"
+    for (tag_base, label) in JAVA_BASE_VARIATIONS
+}
+
+JAVA_BASE |= {
+    "{REGISTRY}/{PROJECT_ID}/java-base-debian12:" + tag_base: "//java:java_base_" + label + "_debian12"
     for (tag_base, label) in JAVA_BASE_VARIATIONS
 }
 
@@ -308,9 +325,13 @@ JAVA17_VARIATIONS = [
 
 JAVA17 = {
     "{REGISTRY}/{PROJECT_ID}/java17:latest": "//java:java17_root_amd64_debian11",
+    "{REGISTRY}/{PROJECT_ID}/java17-debian12:latest": "//java:java17_root_amd64_debian12",
     "{REGISTRY}/{PROJECT_ID}/java17:nonroot": "//java:java17_nonroot_amd64_debian11",
+    "{REGISTRY}/{PROJECT_ID}/java17-debian12:nonroot": "//java:java17_nonroot_amd64_debian12",
     "{REGISTRY}/{PROJECT_ID}/java17:debug": "//java:java17_debug_root_amd64_debian11",
+    "{REGISTRY}/{PROJECT_ID}/java17-debian12:debug": "//java:java17_debug_root_amd64_debian12",
     "{REGISTRY}/{PROJECT_ID}/java17:debug-nonroot": "//java:java17_debug_nonroot_amd64_debian11",
+    "{REGISTRY}/{PROJECT_ID}/java17-debian12:debug-nonroot": "//java:java17_debug_nonroot_amd64_debian12",
 }
 
 JAVA17 |= {
@@ -319,9 +340,20 @@ JAVA17 |= {
     for arch in JAVA_ARCHITECTURES
 }
 
+JAVA17 |= {
+    "{REGISTRY}/{PROJECT_ID}/java17-debian12:" + tag_base + "-" + arch: "//java:java17_" + label + "_" + arch + "_debian12"
+    for (tag_base, label) in JAVA17_VARIATIONS
+    for arch in JAVA_ARCHITECTURES
+}
+
 # oci_image_index
 JAVA17 |= {
     "{REGISTRY}/{PROJECT_ID}/java17-debian11:" + tag_base: "//java:java17_" + label + "_debian11"
+    for (tag_base, label) in JAVA17_VARIATIONS
+}
+
+JAVA17 |= {
+    "{REGISTRY}/{PROJECT_ID}/java17-debian12:" + tag_base: "//java:java17_" + label + "_debian12"
     for (tag_base, label) in JAVA17_VARIATIONS
 }
 
