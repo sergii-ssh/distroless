@@ -1,11 +1,11 @@
-load("//base:distro.bzl", DISTROS = "LANGUAGE_DISTROS")
+load("//base:distro.bzl", "DISTROS")
 load("//:checksums.bzl", ARCHITECTURES = "BASE_ARCHITECTURES")
 load("@contrib_rules_oci//oci:defs.bzl", "oci_image", "oci_image_index", "structure_test")
 load("@rules_pkg//:pkg.bzl", "pkg_tar")
 
 package(default_visibility = ["//visibility:public"])
 
-NODEJS_MAJOR_VERISONS = ("14", "16", "18", "20")
+NODEJS_MAJOR_VERISONS = ("18", "20")
 
 MODE = [
     "",

@@ -22,19 +22,20 @@ pkg_tar(
     oci_image(
         name = "iptables" + "_" + arch,
         architecture = arch,
-        base = "//base:static" + "_" + "nonroot" + "_" + arch + "_debian11",
+        base = "//base:static" + "_" + "nonroot" + "_" + arch + "_debian12",
         tars = [
             # libc
-            deb_pkg(arch, "debian11", "libc6"),
+            deb_pkg(arch, "debian12", "libc6"),
+            deb_pkg(arch, "debian12", "libgcc-s1"),
 
             # iptables
-            deb_pkg(arch, "debian11", "iptables"),
-            deb_pkg(arch, "debian11", "libip4tc2"),
-            deb_pkg(arch, "debian11", "libip6tc2"),
-            deb_pkg(arch, "debian11", "libxtables12"),
-            deb_pkg(arch, "debian11", "libnfnetlink0"),
-            deb_pkg(arch, "debian11", "libnetfilter-conntrack3"),
-            deb_pkg(arch, "debian11", "libmnl0"),
+            deb_pkg(arch, "debian12", "iptables"),
+            deb_pkg(arch, "debian12", "libip4tc2"),
+            deb_pkg(arch, "debian12", "libip6tc2"),
+            deb_pkg(arch, "debian12", "libxtables12"),
+            deb_pkg(arch, "debian12", "libnfnetlink0"),
+            deb_pkg(arch, "debian12", "libnetfilter-conntrack3"),
+            deb_pkg(arch, "debian12", "libmnl0"),
 
             ":symlinks",
         ],

@@ -7,7 +7,7 @@ A debian package index parser with bazel config generation
 ```sh
 # if new versions are available, update snapshots and bazel config
 $ make update
-$ ./update 
+$ ./update
 
 # generate new config for current snapshot
 $ make generate
@@ -22,7 +22,7 @@ flags
 --snapshots <location>    (default: ./debian_snapshots.yaml)
 --packages <location>     (default: ./debian_packages.yaml)
 --versions-out <location> (default: ./debian_versions.bzl)
---archives-out <location> (default: ./devian_archives.bzl)
+--archives-out <location> (default: ./debian_archives.bzl)
 ```
 
 ### debian_snapshots.yaml (input/output)
