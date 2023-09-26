@@ -33,12 +33,6 @@ def repositories():
         urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/f/fonts-dejavu/fonts-dejavu-core_2.37-2_all.deb"],
     )
     debian_archive(
-        name = "amd64_debian11_iptables",
-        package_name = "iptables",
-        sha256 = "d3d90ea8ba3b371d02cc9483aa3e33851c4923854b786df60befc4ec67e5392d",
-        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/i/iptables/iptables_1.8.7-1_amd64.deb"],
-    )
-    debian_archive(
         name = "amd64_debian11_libbrotli1",
         package_name = "libbrotli1",
         sha256 = "65ca7d8b03e9dac09c5d544a89dd52d1aeb74f6a19583d32e4ff5f0c77624c24",
@@ -141,18 +135,6 @@ def repositories():
         urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/h/harfbuzz/libharfbuzz0b_2.7.4-1_amd64.deb"],
     )
     debian_archive(
-        name = "amd64_debian11_libip4tc2",
-        package_name = "libip4tc2",
-        sha256 = "7adeb63d9a350794b8234082082608d1b81097f5b177a9d16c28b72584c4f527",
-        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/i/iptables/libip4tc2_1.8.7-1_amd64.deb"],
-    )
-    debian_archive(
-        name = "amd64_debian11_libip6tc2",
-        package_name = "libip6tc2",
-        sha256 = "f6756882ae06fc61d7af02b3665893f53721590b87be338477ec8d8c99e17732",
-        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/i/iptables/libip6tc2_1.8.7-1_amd64.deb"],
-    )
-    debian_archive(
         name = "amd64_debian11_libjpeg62-turbo",
         package_name = "libjpeg62-turbo",
         sha256 = "28de780a1605cf501c3a4ebf3e588f5110e814b208548748ab064100c32202ea",
@@ -195,12 +177,6 @@ def repositories():
         urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/x/xz-utils/liblzma5_5.2.5-2.1~deb11u1_amd64.deb"],
     )
     debian_archive(
-        name = "amd64_debian11_libmnl0",
-        package_name = "libmnl0",
-        sha256 = "4581f42e3373cb72f9ea4e88163b17873afca614a6c6f54637e95aa75983ea7c",
-        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/libm/libmnl/libmnl0_1.0.4-3_amd64.deb"],
-    )
-    debian_archive(
         name = "amd64_debian11_libmpdec3",
         package_name = "libmpdec3",
         sha256 = "816404866f754d5662d69db50072018dccb78cf372fc38e0be961fab0f57d741",
@@ -211,18 +187,6 @@ def repositories():
         package_name = "libncursesw6",
         sha256 = "4a53efece402caaa798649f74bfb63fe21ac2fbcacf302554e46fbd17e5b30fc",
         urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/n/ncurses/libncursesw6_6.2+20201114-2+deb11u1_amd64.deb"],
-    )
-    debian_archive(
-        name = "amd64_debian11_libnetfilter-conntrack3",
-        package_name = "libnetfilter-conntrack3",
-        sha256 = "d230aafed9e69a6ee09846b4b9afcecd49e2775651c6d2f22313d21613bc742a",
-        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/libn/libnetfilter-conntrack/libnetfilter-conntrack3_1.0.8-3_amd64.deb"],
-    )
-    debian_archive(
-        name = "amd64_debian11_libnfnetlink0",
-        package_name = "libnfnetlink0",
-        sha256 = "6d650aae2fbfcb261557ed9032ba00c6d69ff30eded71050459af0fc0cf50926",
-        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/libn/libnfnetlink/libnfnetlink0_1.0.1-3+b1_amd64.deb"],
     )
     debian_archive(
         name = "amd64_debian11_libnsl2",
@@ -295,12 +259,6 @@ def repositories():
         package_name = "libuuid1",
         sha256 = "31250af4dd3b7d1519326a9a6764d1466a93d8f498cf6545058761ebc38b2823",
         urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/u/util-linux/libuuid1_2.36.1-8+deb11u1_amd64.deb"],
-    )
-    debian_archive(
-        name = "amd64_debian11_libxtables12",
-        package_name = "libxtables12",
-        sha256 = "9702a4be6f267b58c8fc1cfa0747bbefccb8b9a9af2a3547535533fbf2a7c14d",
-        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/i/iptables/libxtables12_1.8.7-1_amd64.deb"],
     )
     debian_archive(
         name = "amd64_debian11_netbase",
@@ -391,6 +349,12 @@ def repositories():
         package_name = "fonts-dejavu-core",
         sha256 = "8892669e51aab4dc56682c8e39d8ddb7d70fad83c369344e1e240bf3ca22bb76",
         urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/f/fonts-dejavu/fonts-dejavu-core_2.37-6_all.deb"],
+    )
+    debian_archive(
+        name = "amd64_debian12_iptables",
+        package_name = "iptables",
+        sha256 = "2928d3ca6ca8a3dc3f423f6752822b1f3614a5ba609ff7806bcba4449ffe90e1",
+        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/i/iptables/iptables_1.8.9-2_amd64.deb"],
     )
     debian_archive(
         name = "amd64_debian12_libbrotli1",
@@ -495,6 +459,18 @@ def repositories():
         urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/h/harfbuzz/libharfbuzz0b_6.0.0+dfsg-3_amd64.deb"],
     )
     debian_archive(
+        name = "amd64_debian12_libip4tc2",
+        package_name = "libip4tc2",
+        sha256 = "f2c48b367f9ec13f9aa577e7ccf81b371ce5d5fe22dddf9d7aa99f1e0bb7cfc4",
+        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/i/iptables/libip4tc2_1.8.9-2_amd64.deb"],
+    )
+    debian_archive(
+        name = "amd64_debian12_libip6tc2",
+        package_name = "libip6tc2",
+        sha256 = "be88db3dfa2fe3345ea343207f7c75345602686121e579023d021c348b9b4f4d",
+        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/i/iptables/libip6tc2_1.8.9-2_amd64.deb"],
+    )
+    debian_archive(
         name = "amd64_debian12_libjpeg62-turbo",
         package_name = "libjpeg62-turbo",
         sha256 = "95ec30140789a342add8f8371ed018924de51b539056522b66f207b25cba9cad",
@@ -537,10 +513,28 @@ def repositories():
         urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/x/xz-utils/liblzma5_5.4.1-0.2_amd64.deb"],
     )
     debian_archive(
+        name = "amd64_debian12_libmnl0",
+        package_name = "libmnl0",
+        sha256 = "4581f42e3373cb72f9ea4e88163b17873afca614a6c6f54637e95aa75983ea7c",
+        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/libm/libmnl/libmnl0_1.0.4-3_amd64.deb"],
+    )
+    debian_archive(
         name = "amd64_debian12_libncursesw6",
         package_name = "libncursesw6",
         sha256 = "98fa7a53dc565a38b65fb70422ad08001bf5361d8fbc74255280c329996a6bec",
         urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/n/ncurses/libncursesw6_6.4-4_amd64.deb"],
+    )
+    debian_archive(
+        name = "amd64_debian12_libnetfilter-conntrack3",
+        package_name = "libnetfilter-conntrack3",
+        sha256 = "65f1539238f60fcc85d115acd640474f45c77bfddcf402eb7d75965a783c2bc8",
+        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/libn/libnetfilter-conntrack/libnetfilter-conntrack3_1.0.9-3_amd64.deb"],
+    )
+    debian_archive(
+        name = "amd64_debian12_libnfnetlink0",
+        package_name = "libnfnetlink0",
+        sha256 = "ae5cbba417ea48f34c1f72c27e8146a81f20614c1296bca2cd7234c8215fddcc",
+        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/libn/libnfnetlink/libnfnetlink0_1.0.2-2_amd64.deb"],
     )
     debian_archive(
         name = "amd64_debian12_libnsl2",
@@ -615,6 +609,12 @@ def repositories():
         urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/u/util-linux/libuuid1_2.38.1-5+b1_amd64.deb"],
     )
     debian_archive(
+        name = "amd64_debian12_libxtables12",
+        package_name = "libxtables12",
+        sha256 = "cb841d66950a43af4a398625313d2f3da9065299c9738538de6c2c3495857040",
+        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/i/iptables/libxtables12_1.8.9-2_amd64.deb"],
+    )
+    debian_archive(
         name = "amd64_debian12_netbase",
         package_name = "netbase",
         sha256 = "29b23c48c0fe6f878e56c5ddc9f65d1c05d729360f3690a593a8c795031cd867",
@@ -675,12 +675,6 @@ def repositories():
         urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/c/ca-certificates/ca-certificates_20210119_all.deb"],
     )
     debian_archive(
-        name = "arm_debian11_iptables",
-        package_name = "iptables",
-        sha256 = "33a38a099ab1129d03bcd939903703164b44a121a1b2685de1dba0e48bda0dcc",
-        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/i/iptables/iptables_1.8.7-1_armhf.deb"],
-    )
-    debian_archive(
         name = "arm_debian11_libc-bin",
         package_name = "libc-bin",
         sha256 = "f82b1aef7d984cff5841bf41480d273a0158bc8850f3c52659140119ae290496",
@@ -705,36 +699,6 @@ def repositories():
         urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/g/gcc-10/libgomp1_10.2.1-6_armhf.deb"],
     )
     debian_archive(
-        name = "arm_debian11_libip4tc2",
-        package_name = "libip4tc2",
-        sha256 = "c72da2344c3920df21a5609335091b8a9f1d7fc4d730b3ed81c586ab19b43918",
-        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/i/iptables/libip4tc2_1.8.7-1_armhf.deb"],
-    )
-    debian_archive(
-        name = "arm_debian11_libip6tc2",
-        package_name = "libip6tc2",
-        sha256 = "f4bff349fc417c09d048c37333246d540e5c431edaf37f4bc23eceb5868a8249",
-        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/i/iptables/libip6tc2_1.8.7-1_armhf.deb"],
-    )
-    debian_archive(
-        name = "arm_debian11_libmnl0",
-        package_name = "libmnl0",
-        sha256 = "4bdb1db2f51dc3dba624eb82cdd6c1059bc70dd143c7ef02667edc014ab07a47",
-        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/libm/libmnl/libmnl0_1.0.4-3_armhf.deb"],
-    )
-    debian_archive(
-        name = "arm_debian11_libnetfilter-conntrack3",
-        package_name = "libnetfilter-conntrack3",
-        sha256 = "5ff916ad0145f8bba8495077e6c9168d8d4e1adbfbe2c1f0b265c90e3001adc5",
-        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/libn/libnetfilter-conntrack/libnetfilter-conntrack3_1.0.8-3_armhf.deb"],
-    )
-    debian_archive(
-        name = "arm_debian11_libnfnetlink0",
-        package_name = "libnfnetlink0",
-        sha256 = "bdfe085d6dc2fd577b22149a88689fd65c09e4aef480a8b74fdcaed419bba10a",
-        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/libn/libnfnetlink/libnfnetlink0_1.0.1-3+b1_armhf.deb"],
-    )
-    debian_archive(
         name = "arm_debian11_libssl1.1",
         package_name = "libssl1.1",
         sha256 = "fcb6eb0fb5c724c694e57efe6ce21f8860b90d6e2ae81e79db014b0e6b280e44",
@@ -745,12 +709,6 @@ def repositories():
         package_name = "libstdc++6",
         sha256 = "879258df2ac36d9733df014c5a5443944e1a5c4ba9a7eebe5dd28547b4ebb541",
         urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/g/gcc-10/libstdc++6_10.2.1-6_armhf.deb"],
-    )
-    debian_archive(
-        name = "arm_debian11_libxtables12",
-        package_name = "libxtables12",
-        sha256 = "c6af167c24edb857fc5d7568f9012534c7ef2e5d1c0b3b3ecd1494413d955dfd",
-        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/i/iptables/libxtables12_1.8.7-1_armhf.deb"],
     )
     debian_archive(
         name = "arm_debian11_netbase",
@@ -783,6 +741,12 @@ def repositories():
         urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/c/ca-certificates/ca-certificates_20230311_all.deb"],
     )
     debian_archive(
+        name = "arm_debian12_iptables",
+        package_name = "iptables",
+        sha256 = "46b5ef8c30426494c0a6c78317b859d05ba41a8f01b6c77822f4c0ce4a7e7e0d",
+        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/i/iptables/iptables_1.8.9-2_armhf.deb"],
+    )
+    debian_archive(
         name = "arm_debian12_libc-bin",
         package_name = "libc-bin",
         sha256 = "90aca060275e9840b19bfacb962a14dbe163241e38f27297706380564ba9bf76",
@@ -807,6 +771,36 @@ def repositories():
         urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/g/gcc-12/libgomp1_12.2.0-14_armhf.deb"],
     )
     debian_archive(
+        name = "arm_debian12_libip4tc2",
+        package_name = "libip4tc2",
+        sha256 = "58587a592958dd3d2769e198ef27f7e8626bfd6f01e97bf9333faa4dff41bac0",
+        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/i/iptables/libip4tc2_1.8.9-2_armhf.deb"],
+    )
+    debian_archive(
+        name = "arm_debian12_libip6tc2",
+        package_name = "libip6tc2",
+        sha256 = "dea9895d07da91c17b0edddd2511af91ed95aec4af5e7b82342672114fed7ee0",
+        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/i/iptables/libip6tc2_1.8.9-2_armhf.deb"],
+    )
+    debian_archive(
+        name = "arm_debian12_libmnl0",
+        package_name = "libmnl0",
+        sha256 = "4bdb1db2f51dc3dba624eb82cdd6c1059bc70dd143c7ef02667edc014ab07a47",
+        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/libm/libmnl/libmnl0_1.0.4-3_armhf.deb"],
+    )
+    debian_archive(
+        name = "arm_debian12_libnetfilter-conntrack3",
+        package_name = "libnetfilter-conntrack3",
+        sha256 = "0fdee166d3bd34dec790913f663683fb09ee284dd5cef1f4f4686582b5216a1d",
+        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/libn/libnetfilter-conntrack/libnetfilter-conntrack3_1.0.9-3_armhf.deb"],
+    )
+    debian_archive(
+        name = "arm_debian12_libnfnetlink0",
+        package_name = "libnfnetlink0",
+        sha256 = "cd7762761d2884b9ceab27da5dec84e6768381f682d9a8246bf4f787d062c614",
+        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/libn/libnfnetlink/libnfnetlink0_1.0.2-2_armhf.deb"],
+    )
+    debian_archive(
         name = "arm_debian12_libssl3",
         package_name = "libssl3",
         sha256 = "5c850bda9ca4b622d9a9a81ccd662d767a41fb534ac46d04e24f3013f8355386",
@@ -817,6 +811,12 @@ def repositories():
         package_name = "libstdc++6",
         sha256 = "50729c9e7c78ad33529dff20f55d6eb3299055079016973ef068ca2c5eb08eff",
         urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/g/gcc-12/libstdc++6_12.2.0-14_armhf.deb"],
+    )
+    debian_archive(
+        name = "arm_debian12_libxtables12",
+        package_name = "libxtables12",
+        sha256 = "35fffbeb35294938514e02eb602f9aa10d9c586c1b4098042e0bfd454bb40b42",
+        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/i/iptables/libxtables12_1.8.9-2_armhf.deb"],
     )
     debian_archive(
         name = "arm_debian12_netbase",
@@ -865,12 +865,6 @@ def repositories():
         package_name = "fonts-dejavu-core",
         sha256 = "1f67421437b6eb18669d2868e3e02cb88668683d635198142f48aacc5b397118",
         urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/f/fonts-dejavu/fonts-dejavu-core_2.37-2_all.deb"],
-    )
-    debian_archive(
-        name = "arm64_debian11_iptables",
-        package_name = "iptables",
-        sha256 = "21699bd1f42a470d272ebaadd9208fa8088c69d6ff1a5124f6af24ef7ac63f2a",
-        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/i/iptables/iptables_1.8.7-1_arm64.deb"],
     )
     debian_archive(
         name = "arm64_debian11_libbrotli1",
@@ -975,18 +969,6 @@ def repositories():
         urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/h/harfbuzz/libharfbuzz0b_2.7.4-1_arm64.deb"],
     )
     debian_archive(
-        name = "arm64_debian11_libip4tc2",
-        package_name = "libip4tc2",
-        sha256 = "d1fe2f3f384c2c9205b33822d6510c5f1f68d93f3ce487638d162b9667ff1f27",
-        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/i/iptables/libip4tc2_1.8.7-1_arm64.deb"],
-    )
-    debian_archive(
-        name = "arm64_debian11_libip6tc2",
-        package_name = "libip6tc2",
-        sha256 = "40a45ce5fa8b3926efc281cab4d0ba9846dee18295c9374ad8917c7dbb113b2e",
-        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/i/iptables/libip6tc2_1.8.7-1_arm64.deb"],
-    )
-    debian_archive(
         name = "arm64_debian11_libjpeg62-turbo",
         package_name = "libjpeg62-turbo",
         sha256 = "8903394de23dc6ead5abfc80972c8fd44300c9903ad4589d0df926e71977d881",
@@ -1029,12 +1011,6 @@ def repositories():
         urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/x/xz-utils/liblzma5_5.2.5-2.1~deb11u1_arm64.deb"],
     )
     debian_archive(
-        name = "arm64_debian11_libmnl0",
-        package_name = "libmnl0",
-        sha256 = "d63aafb6f2c07db8fcb135b00ff915baf72ef8a3397e773c9c24d67950c6a46c",
-        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/libm/libmnl/libmnl0_1.0.4-3_arm64.deb"],
-    )
-    debian_archive(
         name = "arm64_debian11_libmpdec3",
         package_name = "libmpdec3",
         sha256 = "171e2581970f36a39f65d1ca3c761e76b103844daae7903fcc07f7c3822a05bb",
@@ -1045,18 +1021,6 @@ def repositories():
         package_name = "libncursesw6",
         sha256 = "0b7192ce69cf53288b90ece6cfb2745780f5bf72536b882ca372a2b0d8916f05",
         urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/n/ncurses/libncursesw6_6.2+20201114-2+deb11u1_arm64.deb"],
-    )
-    debian_archive(
-        name = "arm64_debian11_libnetfilter-conntrack3",
-        package_name = "libnetfilter-conntrack3",
-        sha256 = "754a300b2c4bb477e425cfbb4de8af734e6f0523c26e09d1115004d425cf60b6",
-        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/libn/libnetfilter-conntrack/libnetfilter-conntrack3_1.0.8-3_arm64.deb"],
-    )
-    debian_archive(
-        name = "arm64_debian11_libnfnetlink0",
-        package_name = "libnfnetlink0",
-        sha256 = "3a43bb97c16a4a4b2321973fe83b9a5d98e523415f9909cf978aef542e77f538",
-        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/libn/libnfnetlink/libnfnetlink0_1.0.1-3+b1_arm64.deb"],
     )
     debian_archive(
         name = "arm64_debian11_libnsl2",
@@ -1129,12 +1093,6 @@ def repositories():
         package_name = "libuuid1",
         sha256 = "3d677da6a22e9cac519fed5a2ed5b20a4217f51ca420fce57434b5e813c26e03",
         urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/u/util-linux/libuuid1_2.36.1-8+deb11u1_arm64.deb"],
-    )
-    debian_archive(
-        name = "arm64_debian11_libxtables12",
-        package_name = "libxtables12",
-        sha256 = "fa07088a313d8dae7a8cba0780117e80ead683ac549fd9986a52a3280232272a",
-        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/i/iptables/libxtables12_1.8.7-1_arm64.deb"],
     )
     debian_archive(
         name = "arm64_debian11_netbase",
@@ -1225,6 +1183,12 @@ def repositories():
         package_name = "fonts-dejavu-core",
         sha256 = "8892669e51aab4dc56682c8e39d8ddb7d70fad83c369344e1e240bf3ca22bb76",
         urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/f/fonts-dejavu/fonts-dejavu-core_2.37-6_all.deb"],
+    )
+    debian_archive(
+        name = "arm64_debian12_iptables",
+        package_name = "iptables",
+        sha256 = "5cb1974950a07f89c2d61a20e62d2dbcd882acb6d522d36ad3c690f6f5d3c643",
+        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/i/iptables/iptables_1.8.9-2_arm64.deb"],
     )
     debian_archive(
         name = "arm64_debian12_libbrotli1",
@@ -1329,6 +1293,18 @@ def repositories():
         urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/h/harfbuzz/libharfbuzz0b_6.0.0+dfsg-3_arm64.deb"],
     )
     debian_archive(
+        name = "arm64_debian12_libip4tc2",
+        package_name = "libip4tc2",
+        sha256 = "fc5b488a30f697d13c8547ca32cebf53880141af77ec36c58b04f899b5708208",
+        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/i/iptables/libip4tc2_1.8.9-2_arm64.deb"],
+    )
+    debian_archive(
+        name = "arm64_debian12_libip6tc2",
+        package_name = "libip6tc2",
+        sha256 = "f921206811bbda3dfa03995142ee704fd13f2bb07291ed418bd41fbea3a1d8cc",
+        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/i/iptables/libip6tc2_1.8.9-2_arm64.deb"],
+    )
+    debian_archive(
         name = "arm64_debian12_libjpeg62-turbo",
         package_name = "libjpeg62-turbo",
         sha256 = "de66f186f3ff3c1d10c2e75ae056b019b3f7f091f51096a06cade48b2dea875b",
@@ -1371,10 +1347,28 @@ def repositories():
         urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/x/xz-utils/liblzma5_5.4.1-0.2_arm64.deb"],
     )
     debian_archive(
+        name = "arm64_debian12_libmnl0",
+        package_name = "libmnl0",
+        sha256 = "d63aafb6f2c07db8fcb135b00ff915baf72ef8a3397e773c9c24d67950c6a46c",
+        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/libm/libmnl/libmnl0_1.0.4-3_arm64.deb"],
+    )
+    debian_archive(
         name = "arm64_debian12_libncursesw6",
         package_name = "libncursesw6",
         sha256 = "cf32cb6751718872c6def448b82211eec494f688e2f1a3e6c71bfdaf6b0722c5",
         urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/n/ncurses/libncursesw6_6.4-4_arm64.deb"],
+    )
+    debian_archive(
+        name = "arm64_debian12_libnetfilter-conntrack3",
+        package_name = "libnetfilter-conntrack3",
+        sha256 = "837ebd84c43dc9f6c840695f64763ff4a3b7e5e83eedb37817e272e75fcc84bf",
+        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/libn/libnetfilter-conntrack/libnetfilter-conntrack3_1.0.9-3_arm64.deb"],
+    )
+    debian_archive(
+        name = "arm64_debian12_libnfnetlink0",
+        package_name = "libnfnetlink0",
+        sha256 = "e2c85edf9015dc918ce190397fbbf059ad659941c5a650a250de67f2319a903b",
+        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/libn/libnfnetlink/libnfnetlink0_1.0.2-2_arm64.deb"],
     )
     debian_archive(
         name = "arm64_debian12_libnsl2",
@@ -1449,6 +1443,12 @@ def repositories():
         urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/u/util-linux/libuuid1_2.38.1-5+b1_arm64.deb"],
     )
     debian_archive(
+        name = "arm64_debian12_libxtables12",
+        package_name = "libxtables12",
+        sha256 = "8884a42f98b989e5ba2e91d931b5c6e9eb72568e5d3001d97d73d7913890a7b3",
+        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/i/iptables/libxtables12_1.8.9-2_arm64.deb"],
+    )
+    debian_archive(
         name = "arm64_debian12_netbase",
         package_name = "netbase",
         sha256 = "29b23c48c0fe6f878e56c5ddc9f65d1c05d729360f3690a593a8c795031cd867",
@@ -1519,12 +1519,6 @@ def repositories():
         package_name = "fonts-dejavu-core",
         sha256 = "1f67421437b6eb18669d2868e3e02cb88668683d635198142f48aacc5b397118",
         urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/f/fonts-dejavu/fonts-dejavu-core_2.37-2_all.deb"],
-    )
-    debian_archive(
-        name = "ppc64le_debian11_iptables",
-        package_name = "iptables",
-        sha256 = "8e330b3e676c8c09533f11b5ad56ac4742c59fd4381d1fe74b94f44946ffedf1",
-        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/i/iptables/iptables_1.8.7-1_ppc64el.deb"],
     )
     debian_archive(
         name = "ppc64le_debian11_libbrotli1",
@@ -1599,18 +1593,6 @@ def repositories():
         urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/h/harfbuzz/libharfbuzz0b_2.7.4-1_ppc64el.deb"],
     )
     debian_archive(
-        name = "ppc64le_debian11_libip4tc2",
-        package_name = "libip4tc2",
-        sha256 = "1e35c99a552a6cd41748d6f34273179b06de8d913856fdf41d541cb8ad4c42b5",
-        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/i/iptables/libip4tc2_1.8.7-1_ppc64el.deb"],
-    )
-    debian_archive(
-        name = "ppc64le_debian11_libip6tc2",
-        package_name = "libip6tc2",
-        sha256 = "6109f501e9eb1bfeff34d796943fb01fadf4caea5eaa88fab27ec7efad39c52d",
-        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/i/iptables/libip6tc2_1.8.7-1_ppc64el.deb"],
-    )
-    debian_archive(
         name = "ppc64le_debian11_libjpeg62-turbo",
         package_name = "libjpeg62-turbo",
         sha256 = "7c198ae4e27ddb57d53ee68bf2846b3dc88d33b9948d5f2903ee9e69312848b9",
@@ -1621,24 +1603,6 @@ def repositories():
         package_name = "liblcms2-2",
         sha256 = "e4b32374b944aae5c4ab9e3742a68ad978faae9403c2685c5e44c7aa4d6e0123",
         urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/l/lcms2/liblcms2-2_2.12~rc1-2_ppc64el.deb"],
-    )
-    debian_archive(
-        name = "ppc64le_debian11_libmnl0",
-        package_name = "libmnl0",
-        sha256 = "b947bc2ce491f1b0a7e463673348aef32fa24a450384c6b7dd107757a3b6a0b1",
-        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/libm/libmnl/libmnl0_1.0.4-3_ppc64el.deb"],
-    )
-    debian_archive(
-        name = "ppc64le_debian11_libnetfilter-conntrack3",
-        package_name = "libnetfilter-conntrack3",
-        sha256 = "9836ed2a8e21522313260ebb07bbd387dec186a77093ce2e38d0e626b9d6f86d",
-        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/libn/libnetfilter-conntrack/libnetfilter-conntrack3_1.0.8-3_ppc64el.deb"],
-    )
-    debian_archive(
-        name = "ppc64le_debian11_libnfnetlink0",
-        package_name = "libnfnetlink0",
-        sha256 = "2094675a55b4a2f7311c4ef4b7a8d797c40be2ae4d93fcab9f0d29c0d727c534",
-        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/libn/libnfnetlink/libnfnetlink0_1.0.1-3+b1_ppc64el.deb"],
     )
     debian_archive(
         name = "ppc64le_debian11_libpcre3",
@@ -1669,12 +1633,6 @@ def repositories():
         package_name = "libuuid1",
         sha256 = "8c5a094cf457ffedcd3c401f8aef735a4e9a405cd07208ec6c8e57441f650bdf",
         urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/u/util-linux/libuuid1_2.36.1-8+deb11u1_ppc64el.deb"],
-    )
-    debian_archive(
-        name = "ppc64le_debian11_libxtables12",
-        package_name = "libxtables12",
-        sha256 = "b0f3e443d36a0e902466c513307014c4574df81e14fcac9b4418d71da9a65e8f",
-        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/i/iptables/libxtables12_1.8.7-1_ppc64el.deb"],
     )
     debian_archive(
         name = "ppc64le_debian11_netbase",
@@ -1749,6 +1707,12 @@ def repositories():
         urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/f/fonts-dejavu/fonts-dejavu-core_2.37-6_all.deb"],
     )
     debian_archive(
+        name = "ppc64le_debian12_iptables",
+        package_name = "iptables",
+        sha256 = "0114d31f07a45ab54508bdfc05e50e4bd6d157c2bef98c8b873118fad41f3976",
+        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/i/iptables/iptables_1.8.9-2_ppc64el.deb"],
+    )
+    debian_archive(
         name = "ppc64le_debian12_libbrotli1",
         package_name = "libbrotli1",
         sha256 = "b9449bc0f0acd7c3a861e20c8de0812a153e10a8df96e9fad9532056fb988798",
@@ -1821,6 +1785,18 @@ def repositories():
         urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/h/harfbuzz/libharfbuzz0b_6.0.0+dfsg-3_ppc64el.deb"],
     )
     debian_archive(
+        name = "ppc64le_debian12_libip4tc2",
+        package_name = "libip4tc2",
+        sha256 = "ce7668c1dc54d3a32c698f4ab32e5b861c6e3d335d67fb27eb86be8668cca271",
+        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/i/iptables/libip4tc2_1.8.9-2_ppc64el.deb"],
+    )
+    debian_archive(
+        name = "ppc64le_debian12_libip6tc2",
+        package_name = "libip6tc2",
+        sha256 = "74e90541202ef4adadfc186ea7168cec54aab7b4d6f59eecc003efd46daf9f43",
+        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/i/iptables/libip6tc2_1.8.9-2_ppc64el.deb"],
+    )
+    debian_archive(
         name = "ppc64le_debian12_libjpeg62-turbo",
         package_name = "libjpeg62-turbo",
         sha256 = "adae34f22d413f7e47d6b5dc82a21b85e5df70c0a0119ef8e39b2e8a5c6a0864",
@@ -1831,6 +1807,24 @@ def repositories():
         package_name = "liblcms2-2",
         sha256 = "b4cd31cf86fa0ebcfd55effa35d3396c3500d44dcefee39d1e54263b7c6beabc",
         urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/l/lcms2/liblcms2-2_2.14-2_ppc64el.deb"],
+    )
+    debian_archive(
+        name = "ppc64le_debian12_libmnl0",
+        package_name = "libmnl0",
+        sha256 = "b947bc2ce491f1b0a7e463673348aef32fa24a450384c6b7dd107757a3b6a0b1",
+        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/libm/libmnl/libmnl0_1.0.4-3_ppc64el.deb"],
+    )
+    debian_archive(
+        name = "ppc64le_debian12_libnetfilter-conntrack3",
+        package_name = "libnetfilter-conntrack3",
+        sha256 = "44d0d5082eaf2b84319de57fc41a29d9b336ed6d0fecca90ecbd3d664e07d3ea",
+        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/libn/libnetfilter-conntrack/libnetfilter-conntrack3_1.0.9-3_ppc64el.deb"],
+    )
+    debian_archive(
+        name = "ppc64le_debian12_libnfnetlink0",
+        package_name = "libnfnetlink0",
+        sha256 = "393e0f8848b6ad55b8e0be32a3cdd672db4c69dd45dd795533cc555ac2f697a4",
+        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/libn/libnfnetlink/libnfnetlink0_1.0.2-2_ppc64el.deb"],
     )
     debian_archive(
         name = "ppc64le_debian12_libpcre2-8-0",
@@ -1861,6 +1855,12 @@ def repositories():
         package_name = "libuuid1",
         sha256 = "cf896e205b6ac11337a70031bb0d69748d3c0a901504bd21ff8a8f54386f16af",
         urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/u/util-linux/libuuid1_2.38.1-5+b1_ppc64el.deb"],
+    )
+    debian_archive(
+        name = "ppc64le_debian12_libxtables12",
+        package_name = "libxtables12",
+        sha256 = "80dbe0f7578554ebb37aa41eb1650f9185ba6771ab4610b884d0ec38e2e17b43",
+        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/i/iptables/libxtables12_1.8.9-2_ppc64el.deb"],
     )
     debian_archive(
         name = "ppc64le_debian12_netbase",
@@ -1921,12 +1921,6 @@ def repositories():
         package_name = "fonts-dejavu-core",
         sha256 = "1f67421437b6eb18669d2868e3e02cb88668683d635198142f48aacc5b397118",
         urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/f/fonts-dejavu/fonts-dejavu-core_2.37-2_all.deb"],
-    )
-    debian_archive(
-        name = "s390x_debian11_iptables",
-        package_name = "iptables",
-        sha256 = "f4152891ab7aa9829f1b5a20939ef26bb62427426bf489d6b349317718010328",
-        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/i/iptables/iptables_1.8.7-1_s390x.deb"],
     )
     debian_archive(
         name = "s390x_debian11_libbrotli1",
@@ -2001,18 +1995,6 @@ def repositories():
         urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/h/harfbuzz/libharfbuzz0b_2.7.4-1_s390x.deb"],
     )
     debian_archive(
-        name = "s390x_debian11_libip4tc2",
-        package_name = "libip4tc2",
-        sha256 = "3360dc04378a85a30556a163a9c8859183e01452726effb5fac45f06f2b0e049",
-        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/i/iptables/libip4tc2_1.8.7-1_s390x.deb"],
-    )
-    debian_archive(
-        name = "s390x_debian11_libip6tc2",
-        package_name = "libip6tc2",
-        sha256 = "f8c87ae5d010e0a2303eca7e6f876ddfb1e65d7ce219e08c509884ac4a05110f",
-        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/i/iptables/libip6tc2_1.8.7-1_s390x.deb"],
-    )
-    debian_archive(
         name = "s390x_debian11_libjpeg62-turbo",
         package_name = "libjpeg62-turbo",
         sha256 = "a75580859d0a161124bb1f3dd0ecb9f96786c18b5d39a02b57eb4cf7d7dd8653",
@@ -2023,24 +2005,6 @@ def repositories():
         package_name = "liblcms2-2",
         sha256 = "0de7a9428b71b6abcaa0cccf2bb37aa6800d58baf5ca5fc063c4827703614853",
         urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/l/lcms2/liblcms2-2_2.12~rc1-2_s390x.deb"],
-    )
-    debian_archive(
-        name = "s390x_debian11_libmnl0",
-        package_name = "libmnl0",
-        sha256 = "098aeebf3b34e3d35535d579b9573996bb7664b33e5a7027cdcaa72196ad8d86",
-        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/libm/libmnl/libmnl0_1.0.4-3_s390x.deb"],
-    )
-    debian_archive(
-        name = "s390x_debian11_libnetfilter-conntrack3",
-        package_name = "libnetfilter-conntrack3",
-        sha256 = "b6619d87d7eb2980c015184ac918f548e63c08f5be670c6ae05998ee2945baf9",
-        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/libn/libnetfilter-conntrack/libnetfilter-conntrack3_1.0.8-3_s390x.deb"],
-    )
-    debian_archive(
-        name = "s390x_debian11_libnfnetlink0",
-        package_name = "libnfnetlink0",
-        sha256 = "19dfade1b3dd314a885ee3398b3f35b4816c3ab7850391e1058eb30b0a18f0f1",
-        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/libn/libnfnetlink/libnfnetlink0_1.0.1-3+b1_s390x.deb"],
     )
     debian_archive(
         name = "s390x_debian11_libpcre3",
@@ -2071,12 +2035,6 @@ def repositories():
         package_name = "libuuid1",
         sha256 = "8df64efb47308f903f0b9835b697c84a2be133ffa9af0ac9d93414a2f6771fae",
         urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/u/util-linux/libuuid1_2.36.1-8+deb11u1_s390x.deb"],
-    )
-    debian_archive(
-        name = "s390x_debian11_libxtables12",
-        package_name = "libxtables12",
-        sha256 = "3655d694d13fd64213f6790bf1a3b415ce54dbc427a2b2721e9264ddd87f2445",
-        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/i/iptables/libxtables12_1.8.7-1_s390x.deb"],
     )
     debian_archive(
         name = "s390x_debian11_netbase",
@@ -2151,6 +2109,12 @@ def repositories():
         urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/f/fonts-dejavu/fonts-dejavu-core_2.37-6_all.deb"],
     )
     debian_archive(
+        name = "s390x_debian12_iptables",
+        package_name = "iptables",
+        sha256 = "da4bcabd184fee1f6d91aca276725bff722cf81b713e95ae4eae09d0b167ab36",
+        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/i/iptables/iptables_1.8.9-2_s390x.deb"],
+    )
+    debian_archive(
         name = "s390x_debian12_libbrotli1",
         package_name = "libbrotli1",
         sha256 = "738a3bf125b58288da858228194e294708398ea4a44af2ef16f92569ecf57fd0",
@@ -2223,6 +2187,18 @@ def repositories():
         urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/h/harfbuzz/libharfbuzz0b_6.0.0+dfsg-3_s390x.deb"],
     )
     debian_archive(
+        name = "s390x_debian12_libip4tc2",
+        package_name = "libip4tc2",
+        sha256 = "c9079f283552ddc5234b41ea066d75da528adf13d40b4db73d30ec82596ce149",
+        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/i/iptables/libip4tc2_1.8.9-2_s390x.deb"],
+    )
+    debian_archive(
+        name = "s390x_debian12_libip6tc2",
+        package_name = "libip6tc2",
+        sha256 = "591a89e34bd4860ce9663b3ba6b1c0b41c00324beaa646107440ecbe671ff779",
+        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/i/iptables/libip6tc2_1.8.9-2_s390x.deb"],
+    )
+    debian_archive(
         name = "s390x_debian12_libjpeg62-turbo",
         package_name = "libjpeg62-turbo",
         sha256 = "1274a8aaa6bd5c64a3380eba30f5cbbb8abf0ef083d7809b4a5bb006d862e09d",
@@ -2233,6 +2209,24 @@ def repositories():
         package_name = "liblcms2-2",
         sha256 = "5c972b0d2cdc722ebc796ff22c3bd7e01cd6767e1b5e0d11b2d468c4012a5efc",
         urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/l/lcms2/liblcms2-2_2.14-2_s390x.deb"],
+    )
+    debian_archive(
+        name = "s390x_debian12_libmnl0",
+        package_name = "libmnl0",
+        sha256 = "098aeebf3b34e3d35535d579b9573996bb7664b33e5a7027cdcaa72196ad8d86",
+        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/libm/libmnl/libmnl0_1.0.4-3_s390x.deb"],
+    )
+    debian_archive(
+        name = "s390x_debian12_libnetfilter-conntrack3",
+        package_name = "libnetfilter-conntrack3",
+        sha256 = "ccf80c80827c19992301e5d3d38bef6402e05c4776e9f71d3f36c9eceabc57d5",
+        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/libn/libnetfilter-conntrack/libnetfilter-conntrack3_1.0.9-3_s390x.deb"],
+    )
+    debian_archive(
+        name = "s390x_debian12_libnfnetlink0",
+        package_name = "libnfnetlink0",
+        sha256 = "5d8bef7d25e8f1755eec964102de965169719fdeb1c79daa673300aa1e03c33d",
+        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/libn/libnfnetlink/libnfnetlink0_1.0.2-2_s390x.deb"],
     )
     debian_archive(
         name = "s390x_debian12_libpcre2-8-0",
@@ -2263,6 +2257,12 @@ def repositories():
         package_name = "libuuid1",
         sha256 = "dc15297161de52ebf14bf6e78632a777a34a2b5d580ba8238342543e377fb270",
         urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/u/util-linux/libuuid1_2.38.1-5+b1_s390x.deb"],
+    )
+    debian_archive(
+        name = "s390x_debian12_libxtables12",
+        package_name = "libxtables12",
+        sha256 = "a8292fde7730ea0cf4aac17fd32911e48b898fc24af58cd0fd3cde87eca6f443",
+        urls = ["https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/i/iptables/libxtables12_1.8.9-2_s390x.deb"],
     )
     debian_archive(
         name = "s390x_debian12_netbase",

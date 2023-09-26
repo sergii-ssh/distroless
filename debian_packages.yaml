@@ -14,14 +14,6 @@
     - "libgcc-s1"
     - "libgomp1"
     - "libstdc++6"
-    # custom
-    - "iptables"
-    - "libip4tc2"
-    - "libip6tc2"
-    - "libxtables12"
-    - "libnfnetlink0"
-    - "libnetfilter-conntrack3"
-    - "libmnl0"
 
 # debian 11, limited architectures, java only
 - distros: ["debian11"]
@@ -95,6 +87,14 @@
     - "libgcc-s1"
     - "libgomp1"
     - "libstdc++6"
+    # custom
+    - "iptables"
+    - "libip4tc2"
+    - "libip6tc2"
+    - "libxtables12"
+    - "libnfnetlink0"
+    - "libnetfilter-conntrack3"
+    - "libmnl0"
 
 # debian 12, limited architectures, java only
 - distros: ["debian12"]
