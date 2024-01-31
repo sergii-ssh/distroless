@@ -171,18 +171,18 @@ func Update(snapshotsFile string, packagesFile string, versionsFile string, arch
 		snapshot = latest
 	case err != nil:
 		return err
-	case snapshot.Equivalent(latest):
-		fmt.Println("No new snapshots found.")
-		os.Exit(0)
+	//case snapshot.Equivalent(latest):
+	//	fmt.Println("No new snapshots found.")
+	//	os.Exit(0)
 	default:
-		needUpdate, err := checkForUpdates(snapshot, latest, packages)
+		_, err := checkForUpdates(snapshot, latest, packages)
 		if err != nil {
 			return err
 		}
-		if !needUpdate {
-			fmt.Println("No package updates detected.")
-			os.Exit(0)
-		}
+		//if !needUpdate {
+		//	fmt.Println("No package updates detected.")
+		//	os.Exit(0)
+		//}
 		snapshot = latest
 	}
 
