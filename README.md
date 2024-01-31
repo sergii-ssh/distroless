@@ -38,8 +38,8 @@ The following images are currently published and updated by the distroless proje
 | gcr.io/distroless/python3-debian12    | latest, nonroot, debug, debug-nonroot  | amd64, arm64                      |
 | gcr.io/distroless/java-base-debian12  | latest, nonroot, debug, debug-nonroot  | amd64, arm64, s390x, ppc64le      |
 | gcr.io/distroless/java17-debian12     | latest, nonroot, debug, debug-nonroot  | amd64, arm64, s390x, ppc64le      |
-| gcr.io/distroless/nodejs18-debian12   | latest, nonroot, debug, debug-nonroot  | amd64, arm64                      |
-| gcr.io/distroless/nodejs20-debian12   | latest, nonroot, debug, debug-nonroot  | amd64, arm64                      |
+| gcr.io/distroless/nodejs18-debian12   | latest, nonroot, debug, debug-nonroot  | amd64, arm64, arm, s390x, ppc64le |
+| gcr.io/distroless/nodejs20-debian12   | latest, nonroot, debug, debug-nonroot  | amd64, arm64, arm, s390x, ppc64le |
 
 #### Debian 11
 | Image                                 | Tags                                   | Architecture Suffixes             |
@@ -64,15 +64,17 @@ Any other tags are considered deprecated and are no longer updated
 All distroless images are signed by [cosign](https://github.com/sigstore/cosign).
 We recommend verifying any distroless image you use before building your image.
 
-#### Keyless (recommended)
-Distroless images are signed with cosign in keyless mode.  You can verify the keyless signature of any distroless image with:
+#### Keyless
+Distroless images are signed with cosign in keyless mode, this is the only supported mechanism starting November 2023.  You can verify the keyless signature of any distroless image with:
 
 ```
 cosign verify $IMAGE_NAME --certificate-oidc-issuer https://accounts.google.com  --certificate-identity keyless@distroless.iam.gserviceaccount.com
 ```
 
-#### Key (no tlog, deprecated, EOL Sept 2023)
+#### Key (DEPRECATED)
 Verifying using the distroless keys is deprecated in favor of keyless. These signing events are not uploaded to the transparency log. You can use the [distroless public key](cosign.pub) to verify any distroless image with:
+
+Images built after November 2023 will not be verifyable with `cosign.pub`, use keyless signature verification
 
 ```
 cat cosign.pub
@@ -102,7 +104,7 @@ ENTRYPOINT "myapp"
 ```
 
 For the same reasons, if the entrypoint is set to the empty vector, the CMD command should be specified in `vector` form (see examples below).
-Note that by default static, base and cc images have the empty vector entrypoint. Images with an included language runtime have a language specific default (see: [java](java/README.md#usage), [nodejs](nodejs/README.md#usage), [python3](experimental/python3/README.md#usage)).
+Note that by default static, base and cc images have the empty vector entrypoint. Images with an included language runtime have a language specific default (see: [java](java/README.md#usage), [nodejs](nodejs/README.md#usage), [python3](python3/README.md#usage)).
 
 ### Docker
 
@@ -126,9 +128,8 @@ Follow these steps to get started:
     * [gcr.io/distroless/nodejs18-debian11](nodejs/README.md)
     * [gcr.io/distroless/nodejs20-debian12](nodejs/README.md)
     * [gcr.io/distroless/nodejs20-debian11](nodejs/README.md)
-
+    * [gcr.io/distroless/python3-debian12](python3/README.md)
 * The following images are also published on `gcr.io`, but are considered experimental and not recommended for production usage:
-    * [gcr.io/distroless/python3-debian12](experimental/python3/README.md)
     * [gcr.io/distroless/python3-debian11](experimental/python3/README.md)
 * Write a multi-stage docker file.
   Note: This requires Docker 17.05 or higher.
@@ -228,7 +229,7 @@ cd examples/python3/
 edit the ```Dockerfile``` to change the final image to ```:debug```:
 
 ```dockerfile
-FROM gcr.io/distroless/python3-debian11:debug
+FROM gcr.io/distroless/python3-debian12:debug
 COPY . /app
 WORKDIR /app
 CMD ["hello.py", "/etc"]
